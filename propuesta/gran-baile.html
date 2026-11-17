@@ -201,6 +201,15 @@ section{position:relative;padding:clamp(60px,9vw,120px) 0}
   .tabbar .sello i{width:58px;height:58px;border-radius:50%;background:var(--lima);color:var(--k);border:3px solid var(--k);box-shadow:0 0 0 3px var(--rosa);display:grid;place-items:center;font-size:1.5rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.boton{transition:none}}
+/* ---- celular: modo ligero (ver nota en barda-blanca.html) ---- */
+@media (max-width:760px),(pointer:coarse){
+  .relieve,.luz,.oscuro{display:none}
+  body{background-image:radial-gradient(ellipse 70% 600px at 85% 0,rgba(255,190,110,.32),rgba(255,160,80,.1) 50%,transparent 80%),var(--relieve),var(--muro);
+    background-size:100% 1200px,var(--tw) var(--th),var(--tw) var(--th);background-repeat:no-repeat,repeat,repeat;background-blend-mode:screen,multiply,normal}
+  *,*::before,*::after{filter:none!important}
+  .vida .poste .foco{animation:none}
+}
+
 </style>
 <link rel="stylesheet" href="assets/vida.css">
 <style>

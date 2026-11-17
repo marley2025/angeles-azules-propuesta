@@ -325,6 +325,14 @@ footer{padding:70px 0 130px;color:var(--tinta)}
 </style>
 <link rel="stylesheet" href="assets/vida.css">
 <style>
+/* ---- celular: modo ligero ---- */
+@media (max-width:760px),(pointer:coarse){
+  .pincel,.pincel *{filter:none!important}
+  .muro::after,.cartel::after,.toldo::after{display:none}
+  .vida .globo.izq.visto,.vida .globo.der.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards}
+}
+img.capa-muro{object-fit:fill}
+.hueco img{display:block;width:100%;height:100%}
 /* ---- vida A ---- */
 .vida .globo.izq.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece-a 3s ease-in-out 2s infinite alternate}
 .vida .globo.der.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece-a 3.4s ease-in-out 2.2s infinite alternate}
@@ -716,6 +724,16 @@ function humedad(sec,seed){
 document.querySelectorAll('.muro').forEach((m,i)=>humedad(m,i*7+3));
 const pintaMuro=()=>{document.querySelectorAll('.hueco').forEach((h,i)=>hueco(h,i*13+5));document.querySelectorAll('.grieta').forEach(grieta)};
 pintaMuro();
+// Las capas generadas usan filtros SVG pesados. Se convierten a <img>: el navegador las pinta
+// una sola vez y luego sólo las reutiliza (scroll y animaciones mucho más fluidos, sobre todo en celular).
+function aImagen(svg,clase){
+  if(!svg)return;const c=svg.cloneNode(true);c.setAttribute('xmlns',NS);
+  const img=new Image();img.alt='';img.setAttribute('aria-hidden','true');if(clase)img.className=clase;img.decoding='async';
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(c));
+  svg.replaceWith(img);
+}
+document.querySelectorAll('svg.capa-muro').forEach(s=>aImagen(s,'capa-muro'));
+document.querySelectorAll('.hueco').forEach(h=>{if(getComputedStyle(h).display!=='none')aImagen(h.querySelector('svg'))});
 
 // Revelado + pestaña activa
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visto');io.unobserve(en.target)}}),{threshold:.1});

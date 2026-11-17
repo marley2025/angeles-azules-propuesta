@@ -200,6 +200,16 @@ section{position:relative;padding:clamp(56px,8vw,110px) 0}
   .tabbar .sello i{width:56px;height:56px;border-radius:50%;background:var(--amarillo);border:3px solid var(--k);display:grid;place-items:center;box-shadow:3px 3px 0 var(--k);font-size:1.5rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.boton{transition:none}}
+/* ---- celular: modo ligero ----
+   Los filtros SVG (pincel) y la capa de relieve con mezcla multiply sobre toda la página
+   son muy caros de pintar en teléfonos (sobre todo iPhone). En celular el relieve se mezcla
+   sólo con el fondo y las letras quedan sin filtro: se ve casi igual y pinta mucho más rápido. */
+@media (max-width:760px),(pointer:coarse){
+  .relieve{display:none}
+  body{background-image:var(--relieve),var(--muro);background-size:var(--tw) var(--th);background-blend-mode:multiply}
+  *,*::before,*::after{filter:none!important}
+}
+
 </style>
 <link rel="stylesheet" href="assets/vida.css">
 <style>
