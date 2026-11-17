@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los Ángeles Azules — Rótulo de Barrio</title>
+<meta name="description" content="Propuesta conceptual de rediseño inspirada en los rótulos pintados a mano de pueblos y barrios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chela+One&family=Lobster&family=Ranchers&family=Rye&family=Six+Caps&family=Ultra&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cal:#EFE6D1; --cal-sucia:#E2D6BA; --cemento:#BDB6A6;
+  --azul:#1D3A9A; --azul-osc:#11226088; --marino:#12215C;
+  --turquesa:#22A898; --turq-osc:#137064;
+  --amarillo:#F4B714; --naranja:#EE7A12;
+  --rosa:#DF1A7C; --rojo:#D9261C; --verde:#25803A; --verde-osc:#175C27;
+  --tinta:#17120E; --blanco:#FBF7EC;
+  --g:clamp(16px,4vw,48px);
+
+  /* textura de aplanado (ruido fino) */
+  --grano:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* manchas de humedad / suciedad */
+  --manchas:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' preserveAspectRatio='none'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004' numOctaves='4' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .34 0 0 0 0 .2 0 0 0 1.6 -.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  /* máscara de pintura descarapelada */
+  --desgaste:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.028' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -34 23.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
+  --desgaste-suave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03' numOctaves='4' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -34 26.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
+  --relieve:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='l' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.075' numOctaves='4' seed='2' stitchTiles='stitch'/%3E%3CfeDiffuseLighting surfaceScale='1.5' diffuseConstant='1' lighting-color='white'%3E%3CfeDistantLight azimuth='225' elevation='30'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");
+  --rasp:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -40 29.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
+  --ladrillo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='40'%3E%3Crect width='64' height='40' fill='%23c9b994'/%3E%3Crect x='1' y='1' width='60' height='17' fill='%23a3482d'/%3E%3Crect x='-31' y='21' width='60' height='17' fill='%23933f27'/%3E%3Crect x='33' y='21' width='60' height='17' fill='%23ae5637'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cal);color:var(--tinta);font-family:"Work Sans",system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px dashed var(--rosa);outline-offset:4px}
+.c{max-width:1200px;margin:0 auto;padding:0 var(--g);position:relative}
+
+/* ================= MURO ================= */
+.muro{position:relative;isolation:isolate;overflow:hidden;background-color:var(--cal)}
+.muro::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:var(--grano) 0 0/260px;}
+.muro.cemento{background-color:var(--cemento)}
+.muro.amarillo{background-color:#F0C54A}
+.muro.turquesa{background-color:#5FC2B5}
+.muro.rosa{background-color:#E77FAF}
+.muro.azul{background-color:#3D5BB5}
+
+/* pintura: todo lo pintado sobre el muro se descarapela */
+.pintura{-webkit-mask:var(--desgaste) 0 0/520px;mask:var(--desgaste) 0 0/520px}
+.pintura-suave{-webkit-mask:var(--desgaste-suave) 0 0/520px;mask:var(--desgaste-suave) 0 0/520px}
+.baile .dia,.baile h3{-webkit-mask:var(--desgaste-suave) 0 0/520px;mask:var(--desgaste-suave) 0 0/520px}
+.ciudades span{white-space:nowrap}
+.pincel{filter:url(#pincel)}
+
+/* ladrillo expuesto: se genera con SVG en JS */
+.hueco{position:absolute;z-index:0;pointer-events:none}
+.hueco svg{display:block;width:100%;height:100%;overflow:visible}
+.grieta{position:absolute;z-index:0;pointer-events:none;overflow:visible}
+/* relieve del aplanado: pasa por encima de la pintura para integrarla al muro */
+.muro::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:soft-light;opacity:.85;
+  background:var(--relieve) 0 0/420px}
+.capa-muro{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.cortina,.tele,.toldo,.formulario{position:relative;z-index:2}
+.fantasma{position:absolute;z-index:-1;pointer-events:none;font-family:"Rye",serif;text-transform:uppercase;color:var(--rojo);opacity:.09;white-space:nowrap;line-height:1}
+
+/* guardapolvo: aplanado gris abajo, pintura encima que se cae */
+.guardapolvo{position:absolute;left:0;right:0;bottom:0;z-index:-1;height:var(--h,90px);background:#a7a092;
+  background-image:var(--grano);background-size:260px}
+.guardapolvo i{position:absolute;left:-10px;right:-10px;bottom:0;top:-10px;background:var(--c,var(--azul));border-top:10px solid var(--c2,var(--amarillo));filter:url(#borde-mano)}
+.guardapolvo i::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,22,10,.45),transparent 75%)}
+/* ================= LETRAS DE ROTULISTA ================= */
+.ranchers{font-family:"Ranchers",sans-serif;text-transform:uppercase;line-height:.9;letter-spacing:.01em;word-spacing:.14em}
+.chela{font-family:"Chela One",sans-serif;line-height:1}
+.rye{font-family:"Rye",serif;text-transform:uppercase;line-height:1}
+.six{font-family:"Six Caps",sans-serif;text-transform:uppercase;line-height:.85;letter-spacing:.02em}
+.lobster{font-family:"Lobster",cursive;line-height:1.05}
+.ultra{font-family:"Ultra",serif;text-transform:uppercase;line-height:.95}
+
+/* combinaciones clásicas: relleno + filete + sombra proyectada */
+.l-rojo{color:var(--rojo);-webkit-text-stroke:.06em var(--tinta);paint-order:stroke fill;text-shadow:.06em .06em 0 var(--amarillo),.09em .09em 0 var(--tinta)}
+.l-azul{color:var(--azul);-webkit-text-stroke:.05em var(--blanco);paint-order:stroke fill;text-shadow:.05em .05em 0 var(--tinta)}
+.l-amarillo{color:var(--amarillo);-webkit-text-stroke:.06em var(--tinta);paint-order:stroke fill;text-shadow:.07em .07em 0 var(--rojo),.1em .1em 0 var(--tinta)}
+.l-blanco{color:var(--blanco);-webkit-text-stroke:.06em var(--tinta);paint-order:stroke fill;text-shadow:.07em .07em 0 var(--tinta)}
+.l-verde{color:var(--verde);-webkit-text-stroke:.05em var(--blanco);paint-order:stroke fill;text-shadow:.06em .06em 0 var(--tinta)}
+.subrayo{display:inline-block;position:relative}
+.subrayo::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-.12em;height:.12em;background:currentColor;border-radius:40% 60% 50% 50%/50%;transform:rotate(-1deg)}
+.destello{font-style:normal;color:var(--amarillo);-webkit-text-stroke:1px var(--tinta)}
+
+/* botón pintado */
+.boton{display:inline-flex;align-items:center;gap:.4em;text-decoration:none;cursor:pointer;border:0;
+  font-family:"Ranchers",sans-serif;text-transform:uppercase;font-size:1.25rem;letter-spacing:.03em;line-height:1;
+  color:var(--blanco);background:var(--rojo);padding:.6em 1.1em .5em;
+  border-radius:48% 52% 46% 54%/58% 44% 56% 42%;
+  box-shadow:inset 0 0 0 3px var(--tinta),4px 5px 0 var(--tinta);transition:transform .15s}
+.boton:hover{transform:rotate(-2deg) scale(1.04)}
+.boton.azul{background:var(--azul)}
+.boton.amarillo{background:var(--amarillo);color:var(--tinta)}
+.boton.verde{background:var(--verde)}
+.manita{font-family:serif;font-size:2.2rem;line-height:1;color:var(--tinta);display:inline-block}
+
+/* ================= HEADER: lámina pintada ================= */
+.top{position:sticky;top:0;z-index:50;background:var(--marino);color:var(--blanco);border-bottom:4px solid var(--amarillo);box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.top .c{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.top .logo-mini{height:54px;width:auto}
+.nav{display:flex;gap:2px;list-style:none}
+.nav a{display:block;font-family:"Ranchers";text-transform:uppercase;font-size:1.15rem;letter-spacing:.04em;text-decoration:none;padding:.3em .7em}
+.nav a:hover{color:var(--amarillo)}
+.nav a.merch{background:var(--rojo);border-radius:45% 55% 50% 50%/55% 45% 55% 45%;box-shadow:inset 0 0 0 2px var(--tinta)}
+.idioma{font-family:"Ranchers";font-size:1rem;display:flex;gap:8px}
+.idioma b{color:var(--amarillo)}
+.idioma a{opacity:.6;text-decoration:none}
+
+/* ================= HERO: barda de baile ================= */
+.hero{padding:34px 0 150px;text-align:center}
+.cable{position:absolute;top:0;left:0;width:100%;height:120px;z-index:0;pointer-events:none}
+.anuncio{position:relative;z-index:1;max-width:980px;margin:0 auto}
+.anuncio svg.arco{width:100%;max-width:900px;height:auto;display:block;margin:0 auto;overflow:visible}
+.amenizado{font-family:"Lobster";font-size:clamp(1.5rem,3.4vw,2.6rem);color:var(--azul);margin:-.2em 0 .1em}
+.amenizado em{font-style:normal;color:var(--rojo)}
+.logo-pintado{width:min(560px,92%);margin:0 auto;transform:rotate(-1.5deg)}
+.gira{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2vw,24px);margin-top:.3em;flex-wrap:wrap}
+.gira .ultra{font-size:clamp(2rem,6vw,4.6rem)}
+.fechas-linea{font-family:"Six Caps";font-size:clamp(2.6rem,7vw,5.4rem);color:var(--rojo);line-height:.9;letter-spacing:.04em;margin-top:.1em}
+.fechas-linea span{color:var(--verde)}
+.ciudades{font-family:"Chela One";font-size:clamp(1.1rem,2.3vw,1.7rem);color:var(--tinta);margin:.4em auto 0;max-width:40ch}
+.ciudades i{font-style:normal;color:var(--rojo);padding:0 .25em}
+.cta-hero{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+.globo{position:absolute;z-index:2;width:clamp(120px,14vw,170px);aspect-ratio:1;display:grid;place-items:center;text-align:center;border-radius:50%;
+  font-family:"Ranchers";text-transform:uppercase;line-height:.95;font-size:clamp(1.05rem,1.6vw,1.4rem);box-shadow:inset 0 0 0 4px var(--tinta),inset 0 0 0 9px var(--blanco),inset 0 0 0 12px var(--tinta)}
+.globo.izq{left:2%;top:40%;background:var(--amarillo);transform:rotate(-10deg)}
+.globo.der{right:2%;top:24%;background:var(--rosa);color:var(--blanco);transform:rotate(9deg)}
+.globo small{display:block;font-family:"Lobster";text-transform:none;font-size:.8em}
+
+/* ================= TOUR ================= */
+.seccion{padding:clamp(72px,9vw,120px) 0 clamp(120px,12vw,170px)}
+.encabezado{text-align:center;margin-bottom:clamp(20px,3vw,36px)}
+.encabezado svg{width:100%;max-width:820px;height:auto;display:block;margin:0 auto;overflow:visible}
+.encabezado .lobster{font-size:clamp(1.4rem,3vw,2.2rem);color:var(--tinta)}
+.tour-grid{display:grid;grid-template-columns:1fr 300px;gap:clamp(24px,4vw,56px);align-items:start}
+.filtros{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+.filtros button{font-family:"Ranchers";text-transform:uppercase;font-size:1.15rem;background:none;border:0;cursor:pointer;color:var(--tinta);padding:.2em .4em;opacity:.55}
+.filtros button[aria-pressed="true"]{opacity:1;color:var(--rojo);text-decoration:underline wavy;text-underline-offset:6px}
+.baile{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(12px,2.5vw,28px);align-items:center;padding:14px 0 16px;position:relative}
+.baile + .baile::before{content:"";position:absolute;top:0;left:3%;right:3%;height:5px;background:var(--tinta);opacity:.8;
+  border-radius:50%;clip-path:polygon(0 40%,20% 0,45% 50%,70% 10%,100% 45%,96% 100%,60% 70%,30% 100%,4% 80%)}
+.baile .dia{text-align:center;min-width:3.2ch}
+.baile .dia b{display:block;font-family:"Ultra";font-size:clamp(2.2rem,5vw,3.6rem);line-height:.9}
+.baile .dia span{font-family:"Ranchers";font-size:1.1rem;letter-spacing:.06em}
+.baile h3{word-spacing:.12em;font-family:"Ranchers";text-transform:uppercase;font-size:clamp(1.6rem,3.6vw,2.7rem);line-height:.95;font-weight:400}
+.baile p{font-family:"Lobster";font-size:clamp(1.05rem,2vw,1.35rem)}
+.baile:nth-child(3n+1) .dia,.baile:nth-child(3n+1) h3{color:var(--rojo)}
+.baile:nth-child(3n+2) .dia,.baile:nth-child(3n+2) h3{color:var(--azul)}
+.baile:nth-child(3n) .dia,.baile:nth-child(3n) h3{color:var(--verde-osc)}
+.agotado{font-family:"Ranchers";text-transform:uppercase;font-size:1.5rem;color:var(--blanco);background:var(--rojo);padding:.15em .6em;transform:rotate(-8deg);display:inline-block;box-shadow:inset 0 0 0 3px var(--tinta)}
+.nota{font-size:.82rem;opacity:.7;margin-top:16px;text-align:center}
+
+/* carteles pegados */
+.carteles{position:relative;height:520px}
+.cartel{position:absolute;width:240px;padding:18px 16px 22px;text-align:center;box-shadow:2px 4px 6px rgba(40,25,10,.35);
+  clip-path:polygon(0 2%,6% 0,14% 1.5%,24% 0,37% 2%,51% .5%,63% 2%,78% 0,90% 1.5%,100% 0,99% 14%,100% 30%,98.5% 47%,100% 63%,99% 80%,100% 98%,88% 99%,72% 97.5%,55% 100%,40% 98%,25% 100%,10% 98%,0 100%,1.5% 82%,0 64%,1% 45%,0 26%)}
+.cartel::after{content:"";position:absolute;inset:0;background:var(--grano) 0 0/260px;mix-blend-mode:multiply;opacity:.7;pointer-events:none}
+.cartel.a{background:var(--amarillo);top:0;left:20px;transform:rotate(-4deg)}
+.cartel.b{background:var(--rosa);color:var(--blanco);top:210px;left:40px;transform:rotate(5deg)}
+.cartel .six{font-size:4.4rem;display:block}
+.cartel .ranchers{font-size:2.1rem;display:block}
+.cartel .lobster{font-size:1.3rem}
+.cartel img{width:85%;margin:6px auto}
+.cartel .rasgado{position:absolute;right:0;bottom:0;width:70px;height:70px;background:var(--cal);clip-path:polygon(100% 0,100% 100%,0 100%,30% 75%,45% 60%,70% 40%)}
+
+/* ================= MÚSICA: tienda de discos ================= */
+.fachada-letrero{text-align:center;padding:18px 10px 14px;margin-bottom:34px}
+.fachada-letrero small{display:block;font-family:"Lobster";font-size:clamp(1.3rem,3vw,2rem);color:var(--tinta)}
+.fachada-letrero .rye{font-size:clamp(2.3rem,7vw,5.6rem)}
+.tienda-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:start}
+.cortina{position:relative;border:6px solid #4a4a46;border-top-width:22px;background:
+  repeating-linear-gradient(180deg,#9aa0a3 0 10px,#7e8487 10px 13px,#b7bcbe 13px 16px);box-shadow:6px 8px 0 rgba(40,30,15,.35);
+  padding:clamp(22px,4vw,40px) 18px;text-align:center;min-height:440px;display:flex;flex-direction:column;justify-content:center}
+.cortina::after{content:"";position:absolute;left:50%;bottom:10px;width:46px;height:16px;translate:-50% 0;border:4px solid #3c3c39;border-top:0;border-radius:0 0 12px 12px}
+.cortina .pintado-sobre{position:relative}
+.cortina .yasalio{font-family:"Ranchers";text-transform:uppercase;font-size:clamp(1.4rem,3vw,2rem);color:var(--blanco);background:var(--rojo);display:inline-block;padding:.1em .6em;transform:rotate(-4deg);box-shadow:inset 0 0 0 3px var(--tinta)}
+.cortina .titulo{font-family:"Lobster";font-size:clamp(4.4rem,11vw,8.5rem);line-height:.9;margin:.1em 0}
+.cortina .con{font-family:"Ranchers";text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.3rem)}
+.cortina .con b{color:var(--rosa);font-weight:400}
+.aceptan{margin-top:22px}
+.aceptan small{display:block;font-family:"Rye";font-size:1rem;letter-spacing:.06em;margin-bottom:10px}
+.aceptan .botones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hay{padding-top:6px}
+.hay .ultra{font-size:clamp(4rem,10vw,7rem);display:block;line-height:.8}
+.hay ul{list-style:none;margin-top:10px}
+.hay li a{display:flex;align-items:baseline;justify-content:space-between;gap:12px;text-decoration:none;padding:6px 0}
+.hay li a span{font-family:"Lobster";font-size:clamp(1.6rem,3.6vw,2.5rem);line-height:1.1}
+.hay li:nth-child(odd) a span{color:var(--azul)}
+.hay li:nth-child(even) a span{color:var(--rojo)}
+.hay li a em{font-style:normal;font-family:"Ranchers";text-transform:uppercase;font-size:1rem;white-space:nowrap;border-bottom:3px solid}
+.hay li a:hover span{text-decoration:underline wavy 2px}
+.hay .precio{font-family:"Chela One";font-size:1.3rem;margin-top:16px}
+
+/* ================= VIDEO: fonda ================= */
+.fonda{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,4vw,56px);align-items:start}
+.tele{background:#6a3a1d;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.14) 0 3px,transparent 3px 11px);border:4px solid var(--tinta);border-radius:26px;padding:20px;
+  box-shadow:8px 10px 0 rgba(40,25,10,.45);display:grid;grid-template-columns:1fr 64px;gap:16px;transform:rotate(-1deg)}
+.pantalla{aspect-ratio:4/3;border-radius:36px/28px;border:4px solid var(--tinta);overflow:hidden;position:relative;display:grid;place-items:center;
+  background:radial-gradient(ellipse at center,#3fb7a8,#146e63 75%,#0b3a35)}
+.pantalla::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0 2px,transparent 2px 4px);pointer-events:none}
+.pantalla .t{font-family:"Lobster";font-size:clamp(2.6rem,6vw,4.6rem);color:var(--amarillo);-webkit-text-stroke:2px var(--tinta);paint-order:stroke fill;text-shadow:4px 4px 0 var(--tinta);text-align:center}
+.play{position:absolute;bottom:16px;right:16px;width:70px;height:70px;border-radius:50%;background:var(--rojo);border:4px solid var(--tinta);display:grid;place-items:center;cursor:pointer;z-index:2}
+.play::before{content:"";border-left:22px solid var(--blanco);border-block:14px solid transparent;margin-left:6px}
+.perillas{display:flex;flex-direction:column;gap:14px;align-items:center;padding-top:8px}
+.perillas i{width:44px;height:44px;border-radius:50%;background:#e2d6ba;border:4px solid var(--tinta);position:relative}
+.perillas i::after{content:"";position:absolute;left:50%;top:3px;width:4px;height:13px;background:var(--tinta);translate:-50% 0}
+.perillas i:nth-child(2){rotate:70deg}
+.perillas u{width:44px;height:110px;background:repeating-linear-gradient(0deg,var(--tinta) 0 3px,transparent 3px 9px);opacity:.6}
+.menu{text-align:center}
+.menu .rye{font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--tinta)}
+.menu .ranchers.grande{font-size:clamp(2.8rem,6vw,4.4rem);display:block}
+.menu ol{list-style:none;margin-top:12px}
+.menu li button{width:100%;background:none;border:0;cursor:pointer;padding:10px 4px;text-align:center;color:var(--tinta);font:inherit}
+.menu li small{display:block;font-family:"Ranchers";text-transform:uppercase;font-size:.95rem;letter-spacing:.08em;color:var(--rojo)}
+.menu li b{display:block;font-family:"Lobster";font-weight:400;font-size:clamp(1.5rem,3vw,2rem);line-height:1.1}
+.menu li button[aria-current="true"] b{color:var(--blanco);-webkit-text-stroke:.05em var(--tinta);paint-order:stroke fill;text-shadow:.06em .06em 0 var(--tinta)}
+.menu li button[aria-current="true"] b::before{content:"☛ ";font-family:serif;color:var(--tinta);-webkit-text-stroke:0}
+.menu .precio{font-family:"Chela One";font-size:1.4rem;margin-top:8px}
+
+/* ================= BIO: mural + placa ================= */
+.bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.mural{aspect-ratio:4/5;position:relative;overflow:hidden;border-radius:4px}
+.mural svg{width:100%;height:100%;display:block}
+.placa{background:#d9cfbd;background-image:var(--grano);background-size:260px;border:2px solid #9c8f78;border-radius:6px;
+  box-shadow:inset 0 0 0 8px #cbbfa9,inset 0 0 0 10px #9c8f78,4px 6px 0 rgba(40,25,10,.3);padding:clamp(26px,4vw,44px);text-align:center;color:#3b3226;position:relative}
+.placa::before,.placa::after{content:"";position:absolute;top:16px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#eee,#777)}
+.placa::before{left:16px}.placa::after{right:16px}
+.placa .rye{font-size:clamp(1.6rem,3.2vw,2.4rem);color:#2c251c;text-shadow:1px 1px 0 rgba(255,255,255,.6),-1px -1px 0 rgba(0,0,0,.25)}
+.placa p{margin:.9em auto 0;max-width:46ch;font-size:1.03rem}
+.placa .firma{font-family:"Lobster";font-size:1.5rem;margin-top:1em;color:#2c251c}
+
+/* ================= MERCH: abarrotes ================= */
+.toldo{height:84px;margin:0 -10px;position:relative;z-index:2;
+  background:repeating-linear-gradient(90deg,var(--rojo) 0 60px,var(--blanco) 60px 120px);
+  -webkit-mask:linear-gradient(#000 0 0) 0 0/100% 54px no-repeat,radial-gradient(circle 30px at 30px 54px,#000 97%,#0000) 0 0/60px 100% repeat-x;
+  mask:linear-gradient(#000 0 0) 0 0/100% 54px no-repeat,radial-gradient(circle 30px at 30px 54px,#000 97%,#0000) 0 0/60px 100% repeat-x}
+.toldo::after{content:"";position:absolute;inset:0;background:var(--grano) 0 0/260px;mix-blend-mode:multiply}
+.abarrotes{text-align:center;padding:30px 10px 10px}
+.abarrotes small{font-family:"Rye";font-size:clamp(1rem,2vw,1.5rem);letter-spacing:.15em;color:var(--tinta)}
+.abarrotes .ranchers{font-size:clamp(3.4rem,10vw,8rem);display:block}
+.anaquel{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px 18px;margin-top:30px}
+.producto{text-align:center;text-decoration:none;display:block}
+.producto .pieza{height:170px;display:grid;place-items:center;margin-bottom:8px;transition:transform .2s}
+.producto:hover .pieza{transform:rotate(-4deg) scale(1.05)}
+.producto h3{font-family:"Ranchers";text-transform:uppercase;font-weight:400;font-size:1.6rem;line-height:1}
+.producto .lobster{font-size:1.6rem;color:var(--rojo);display:block;transform:rotate(-3deg)}
+.playera{width:150px;height:150px;background:var(--azul);clip-path:polygon(28% 0,40% 6%,60% 6%,72% 0,100% 16%,90% 38%,80% 33%,80% 100%,20% 100%,20% 33%,10% 38%,0 16%);display:grid;place-items:center;filter:drop-shadow(0 0 0 var(--tinta))}
+.playera span{font-family:"Lobster";color:var(--amarillo);font-size:1.4rem}
+.vinilo{width:150px;height:150px;border-radius:50%;background:repeating-radial-gradient(circle,#111 0 2px,#2a2a2a 2px 4px);display:grid;place-items:center;border:3px solid var(--tinta)}
+.vinilo::after{content:"";width:52px;height:52px;border-radius:50%;background:var(--rosa);border:3px solid var(--tinta)}
+.gorra{width:160px;height:100px;position:relative}
+.gorra::before{content:"";position:absolute;left:14px;top:10px;width:110px;height:80px;background:var(--turquesa);border:3px solid var(--tinta);border-radius:60px 60px 6px 6px}
+.gorra::after{content:"";position:absolute;right:0;bottom:6px;width:70px;height:18px;background:var(--turq-osc);border:3px solid var(--tinta);border-radius:0 20px 20px 0}
+.paliacate{width:130px;height:130px;background:var(--rojo);border:3px solid var(--tinta);transform:rotate(45deg);background-image:radial-gradient(circle,var(--blanco) 0 3px,transparent 3.5px);background-size:18px 18px}
+.fiado{margin-top:40px;text-align:center}
+.fiado .rye{font-size:clamp(1.4rem,3vw,2.2rem);color:var(--tinta);display:inline-block;border:4px solid var(--tinta);padding:.3em .8em;transform:rotate(-1.5deg);background:var(--blanco)}
+
+/* ================= AVISO ================= */
+.aviso-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.aviso h2{font-family:"Ultra";text-transform:uppercase;font-size:clamp(4rem,11vw,8rem);line-height:.85;color:var(--rojo);font-weight:400}
+.aviso .chela{font-size:clamp(1.4rem,2.8vw,2rem);margin-top:.4em;max-width:26ch}
+.aviso .chela b{color:var(--azul);font-weight:400}
+.formulario{display:flex;flex-direction:column;gap:14px}
+.formulario label{font-family:"Ranchers";text-transform:uppercase;font-size:1.2rem;letter-spacing:.04em}
+.formulario input{font:inherit;font-size:1.1rem;padding:.75em 1em;border:0;border-bottom:4px solid var(--tinta);background:rgba(251,247,236,.75)}
+.formulario .boton{align-self:flex-start;margin-top:6px}
+.gracias{display:none;font-family:"Lobster";font-size:2.2rem;color:var(--verde-osc)}
+.formulario.ok .gracias{display:block}.formulario.ok .campos{display:none}
+
+/* ================= PIE ================= */
+footer{padding:70px 0 130px;color:var(--tinta)}
+.pie-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;align-items:start}
+.pie-grid .ranchers{font-size:clamp(2rem,4.5vw,3.4rem)}
+.pie-grid .lobster{font-size:1.6rem;color:var(--azul)}
+.pie-grid h4{font-family:"Rye";font-weight:400;font-size:1.1rem;margin-bottom:10px}
+.pie-grid ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.pie-grid a{text-decoration:none;font-family:"Chela One";font-size:1.3rem}
+.pie-grid a:hover{color:var(--rojo)}
+.redes{display:flex;flex-wrap:wrap;gap:6px 14px}
+.legal{margin-top:46px;font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;opacity:.75}
+
+/* ================= TAB BAR MÓVIL ================= */
+.tabbar{display:none}
+
+/* revelado */
+.revela{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.revela.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.revela{opacity:1;transform:none}}
+
+@media (max-width:980px){
+  .nav,.idioma{display:none}
+  .top .c{height:60px}.top .logo-mini{height:46px}
+  .tour-grid,.tienda-grid,.fonda,.bio-grid,.aviso-grid,.pie-grid{grid-template-columns:1fr}
+  .carteles{height:auto;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .cartel{position:relative;top:auto!important;left:auto!important;width:min(240px,44%)}
+  .cartel .six{font-size:3.2rem}.cartel .ranchers{font-size:1.6rem}
+  .globo{position:relative;left:auto!important;right:auto!important;top:auto!important;display:inline-grid;margin:18px 6px 0;width:118px;font-size:1rem}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:10px;right:10px;bottom:10px;z-index:60;background:var(--marino);border:3px solid var(--tinta);border-radius:14px;padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 4px 0 rgba(0,0,0,.3)}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--blanco);font-family:"Ranchers";text-transform:uppercase;font-size:.85rem;letter-spacing:.04em;padding:4px 0}
+  .tabbar svg{width:24px;height:24px}
+  .tabbar a.activo{color:var(--amarillo)}
+  .tabbar a.merch{background:var(--rojo);border-radius:50%;width:64px;height:64px;justify-self:center;margin-top:-26px;justify-content:center;box-shadow:inset 0 0 0 3px var(--tinta),inset 0 0 0 6px var(--blanco),inset 0 0 0 8px var(--tinta)}
+}
+@media (max-width:600px){
+  .hueco,.grieta{display:none}
+  .hueco.movil{display:block;width:150px!important;height:96px!important;bottom:30px!important}
+  .hero{padding-bottom:120px}
+  .baile{grid-template-columns:auto 1fr;padding:12px 0 14px}
+  .baile .accion{grid-column:1/-1}
+  .baile .accion .boton{width:100%;justify-content:center}
+  .tele{grid-template-columns:1fr;padding:14px}
+  .perillas{flex-direction:row;justify-content:center;padding:0}
+  .perillas u{height:36px;width:90px}
+  .cortina{min-height:0}
+  .anaquel{grid-template-columns:1fr 1fr;gap:26px 10px}
+  .producto .pieza{height:130px;transform:scale(.78)}
+  .producto h3{font-size:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Filtro de orilla de pincel -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="pincel" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="2" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="3.2" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".05 .7" numOctaves="2" seed="7" result="b"/>
+    <feColorMatrix in="b" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 -.2" result="b2"/>
+    <feComposite in="b2" in2="d" operator="in" result="trazo"/>
+    <feMerge><feMergeNode in="d"/><feMergeNode in="trazo"/></feMerge>
+  </filter>
+  <filter id="borde-mano" x="-2%" y="-20%" width="104%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency=".02 .08" numOctaves="2" seed="4" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="pincel-fuerte" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="5" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="top">
+  <div class="c">
+    <a href="#inicio" aria-label="Inicio"><img class="logo-mini" src="assets/logo-laa.webp" alt="Los Ángeles Azules"></a>
+    <nav aria-label="Principal"><ul class="nav">
+      <li><a href="#tour">Bailes</a></li><li><a href="#musica">Música</a></li><li><a href="#video">Video</a></li>
+      <li><a href="#bio">Historia</a></li><li><a href="#avisos">Avisos</a></li><li><a class="merch" href="#merch">Merch</a></li>
+    </ul></nav>
+    <div class="idioma"><b>ES</b><a href="#">EN</a></div>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO: BARDA DE BAILE ============ -->
+<section id="inicio" class="hero muro">
+  <svg class="cable" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 18 Q 720 120 1450 10" stroke="#1b1610" stroke-width="3" fill="none"/><path d="M-10 6 Q 600 90 1450 30" stroke="#1b1610" stroke-width="2" fill="none" opacity=".7"/></svg>
+  <span class="fantasma" style="font-size:9vw;top:22%;left:-2%;transform:rotate(-2deg)">Se prohíbe fijar propaganda</span>
+  <span class="fantasma" style="font-size:5vw;top:8%;right:-6%;color:var(--azul);opacity:.07;transform:rotate(1deg)">Fiestas · XV años · Bodas</span>
+  <div class="hueco movil" style="width:270px;height:170px;left:-40px;bottom:40px"></div>
+  <div class="hueco" style="width:150px;height:96px;right:7%;top:96px"></div>
+  <svg class="grieta" data-seed="3" style="left:18%;top:0;width:140px;height:260px"></svg>
+  <svg class="grieta" data-seed="9" data-dir="up" style="right:22%;bottom:96px;width:180px;height:200px"></svg>
+
+  <div class="globo izq pintura-suave pincel"><span>¡No<br>falte!<small>lleve a la familia</small></span></div>
+  <div class="globo der pintura-suave pincel"><span>Preventa<br>ya<small>¡apúrele!</small></span></div>
+
+  <div class="c anuncio">
+    <svg class="arco pincel pintura" viewBox="0 0 1000 250" role="img" aria-label="¡Gran baile!">
+      <defs><path id="arcoA" d="M 70 235 Q 500 25 930 235"/></defs>
+      <g font-family="Ranchers" font-size="168" text-anchor="middle">
+        <text transform="translate(11 11)" fill="#17120E"><textPath href="#arcoA" startOffset="50%">¡GRAN BAILE!</textPath></text>
+        <text transform="translate(6 6)" fill="#F4B714" stroke="#F4B714" stroke-width="6"><textPath href="#arcoA" startOffset="50%">¡GRAN BAILE!</textPath></text>
+        <text fill="#D9261C" stroke="#17120E" stroke-width="9" paint-order="stroke" stroke-linejoin="round"><textPath href="#arcoA" startOffset="50%">¡GRAN BAILE!</textPath></text>
+      </g>
+    </svg>
+    <div class="amenizado pincel pintura-suave">amenizado por la internacional <em>✦</em></div>
+    <img class="logo-pintado pintura-suave" src="assets/logo-laa.webp" alt="Los Ángeles Azules">
+    <div class="gira pincel pintura">
+      <i class="destello" style="font-size:2.4rem">✦</i>
+      <span class="ultra l-amarillo">Cumbia sin fronteras</span>
+      <i class="destello" style="font-size:2.4rem">✦</i>
+    </div>
+    <div class="fechas-linea pincel pintura-suave">Gira 2026 <span>· Estados Unidos y México ·</span></div>
+    <div class="ciudades"><span>Los Ángeles</span> <i>★</i> <span>Houston</span> <i>★</i> <span>Chicago</span> <i>★</i> <span>Cd. de México</span> <i>★</i> <span>Guadalajara</span> <i>★</i> <span>Nueva York</span></div>
+    <div class="cta-hero">
+      <span class="manita" aria-hidden="true">☛</span>
+      <a class="boton" href="#tour">¡Boletos aquí!</a>
+      <a class="boton azul" href="#musica">▶ Oír “Pa’ Él”</a>
+    </div>
+  </div>
+  <div class="guardapolvo" style="--h:96px;--c:var(--azul);--c2:var(--amarillo)"><i class="pintura"></i></div>
+</section>
+
+<!-- ============ TOUR ============ -->
+<section id="tour" class="seccion muro amarillo">
+  <span class="fantasma" style="font-size:12vw;top:6%;left:4%;color:var(--tinta);opacity:.06">Vulcanizadora</span>
+  <div class="hueco movil" style="width:210px;height:130px;right:-30px;bottom:56px"></div>
+  <div class="c">
+    <div class="encabezado pintura revela">
+      <svg class="pincel" viewBox="0 0 1000 200" role="img" aria-label="Próximos bailes">
+        <defs><path id="arcoB" d="M 30 190 Q 500 30 970 190"/></defs>
+        <g font-family="Rye" font-size="86" text-anchor="middle">
+          <text transform="translate(7 7)" fill="#17120E"><textPath href="#arcoB" startOffset="50%">PRÓXIMOS BAILES</textPath></text>
+          <text fill="#FBF7EC" stroke="#17120E" stroke-width="6" paint-order="stroke"><textPath href="#arcoB" startOffset="50%">PRÓXIMOS BAILES</textPath></text>
+        </g>
+      </svg>
+      <div class="lobster">con la cumbia de Iztapalapa para el mundo</div>
+    </div>
+    <div class="tour-grid">
+      <div class="revela">
+        <div class="filtros" role="group" aria-label="Filtrar por país">
+          <button aria-pressed="true" data-f="todos">Todos</button><button aria-pressed="false" data-f="us">Estados Unidos</button><button aria-pressed="false" data-f="mx">México</button>
+        </div>
+        <div id="fechas" class="pincel"></div>
+        <p class="nota">* Fechas y recintos ilustrativos. En producción se cargan solos desde la boletera / Bandsintown.</p>
+      </div>
+      <div class="carteles revela" aria-hidden="true">
+        <div class="cartel a"><span class="six" style="color:var(--rojo)">Hoy</span><span class="ranchers" style="color:var(--azul)">gran baile</span><img src="assets/logo-laa.webp" alt=""><span class="lobster">Sábado 9 pm · Salón</span><div class="rasgado"></div></div>
+        <div class="cartel b"><span class="lobster">la gira</span><span class="ranchers" style="color:var(--amarillo)">Cumbia sin fronteras</span><span class="six">2026</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="guardapolvo" style="--h:110px;--c:var(--rojo);--c2:var(--tinta)"><i class="pintura"></i></div>
+</section>
+
+<!-- ============ MÚSICA ============ -->
+<section id="musica" class="seccion muro">
+  <span class="fantasma" style="font-size:8vw;bottom:16%;left:-3%;opacity:.07">Hay hielo · refrescos</span>
+  <div class="hueco" style="width:230px;height:150px;left:-40px;bottom:50px"></div>
+  <div class="c">
+    <div class="fachada-letrero pintura revela">
+      <small class="pincel">discos, casetes y novedades</small>
+      <div class="rye l-rojo pincel">“La Azul”</div>
+    </div>
+    <div class="tienda-grid">
+      <div class="cortina revela">
+        <div class="pintado-sobre">
+          <span class="yasalio pincel pintura-suave">¡Ya salió!</span>
+          <div class="titulo l-amarillo pincel pintura">Pa’ Él</div>
+          <div class="con l-blanco pincel pintura-suave">con <b>Tini</b></div>
+          <div class="aceptan">
+            <small class="pincel">Aquí se escucha en:</small>
+            <div class="botones"><a class="boton verde" href="#">Spotify</a><a class="boton azul" href="#">Apple Music</a><a class="boton" href="#">YouTube</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="hay revela">
+        <span class="ultra l-rojo pincel pintura">Hay:</span>
+        <ul class="pincel pintura-suave" id="hay"></ul>
+        <p class="precio pincel">Precios de barrio · ¡Escúchelos gratis!</p>
+      </div>
+    </div>
+  </div>
+  <div class="guardapolvo" style="--h:100px;--c:var(--turquesa);--c2:var(--rosa)"><i class="pintura"></i></div>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section id="video" class="seccion muro rosa">
+  <span class="fantasma" style="font-size:10vw;top:10%;right:-4%;color:var(--blanco);opacity:.12">Comida corrida</span>
+  <div class="hueco" style="width:170px;height:110px;right:-30px;top:40px"></div>
+  <div class="c fonda">
+    <div class="tele revela">
+      <div class="pantalla"><div class="t" id="pantalla-t">Pa’ Él</div><button class="play" aria-label="Reproducir video"></button></div>
+      <div class="perillas" aria-hidden="true"><i></i><i></i><u></u></div>
+    </div>
+    <div class="menu revela">
+      <div class="rye pincel">Fonda</div>
+      <span class="ranchers grande l-blanco pincel pintura">Video corrido</span>
+      <ol id="videos" class="pincel pintura-suave"></ol>
+      <p class="precio pincel">Incluye agua del día · <a href="#">Ver todos los videos</a></p>
+    </div>
+  </div>
+  <div class="guardapolvo" style="--h:100px;--c:var(--verde);--c2:var(--blanco)"><i class="pintura"></i></div>
+</section>
+
+<!-- ============ BIO ============ -->
+<section id="bio" class="seccion muro">
+  <span class="fantasma" style="font-size:9vw;top:4%;left:2%;color:var(--verde);opacity:.07">Ponche · tamales · atole</span>
+  <div class="c bio-grid">
+    <div class="mural pintura-suave revela" aria-hidden="true">
+      <svg viewBox="0 0 400 500" class="pincel">
+        <rect width="400" height="500" fill="#1D3A9A"/>
+        <g fill="#F4B714" stroke="#17120E" stroke-width="3">
+          <circle cx="200" cy="190" r="58"/>
+          <g id="rayos">
+            <path d="M200 90 L212 128 L188 128Z"/><path d="M200 290 L212 252 L188 252Z"/><path d="M100 190 L138 178 L138 202Z"/><path d="M300 190 L262 178 L262 202Z"/>
+            <path d="M129 119 L162 140 L148 154Z"/><path d="M271 261 L238 240 L252 226Z"/><path d="M271 119 L252 154 L238 140Z"/><path d="M129 261 L148 226 L162 240Z"/>
+          </g>
+        </g>
+        <g fill="#17120E"><circle cx="182" cy="182" r="6"/><circle cx="218" cy="182" r="6"/></g>
+        <path d="M178 208 Q200 228 222 208" stroke="#17120E" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- colibríes -->
+        <g stroke="#17120E" stroke-width="2.5"><path d="M60 110 q30 -26 52 -6 l26 -8 l-24 16 q-10 22 -40 14 q14 -10 -14 -16z" fill="#22A898"/><path d="M84 98 q-6 -30 18 -40 q-2 24 -10 40z" fill="#25803A"/></g>
+        <g stroke="#17120E" stroke-width="2.5"><path d="M340 300 q-30 -26 -52 -6 l-26 -8 l24 16 q10 22 40 14 q-14 -10 14 -16z" fill="#5FC2B5"/><path d="M316 288 q6 -30 -18 -40 q2 24 10 40z" fill="#1D3A9A"/></g>
+        <!-- casitas -->
+        <g stroke="#17120E" stroke-width="3">
+          <rect x="0" y="330" width="80" height="110" fill="#DF1A7C"/><rect x="80" y="300" width="70" height="140" fill="#F4B714"/>
+          <rect x="150" y="345" width="90" height="95" fill="#22A898"/><rect x="240" y="315" width="70" height="125" fill="#FBF7EC"/><rect x="310" y="335" width="90" height="105" fill="#D9261C"/>
+          <g fill="#17120E"><rect x="22" y="355" width="20" height="24"/><rect x="100" y="330" width="16" height="22"/><rect x="180" y="370" width="26" height="70"/><rect x="262" y="345" width="22" height="24"/><rect x="335" y="360" width="18" height="22"/></g>
+        </g>
+        <rect y="440" width="400" height="60" fill="#EFE6D1"/>
+        <text x="200" y="482" font-family="Lobster" font-size="34" text-anchor="middle" fill="#DF1A7C" stroke="#17120E" stroke-width="5" paint-order="stroke">De Iztapalapa para el mundo</text>
+      </svg>
+    </div>
+    <div class="placa revela">
+      <div class="rye">Aquí empezó la cumbia de Los Ángeles Azules</div>
+      <p>Los hermanos Mejía Avante convirtieron el sonido de su colonia en un idioma que se baila igual en un salón de fiestas de Iztapalapa que en un festival en Buenos Aires o Los Ángeles.</p>
+      <p>Una cumbia de teclados brillantes y güiro incansable que cruzó generaciones y fronteras, y que hoy suena junto a voces del pop, el rock y el regional de todo el continente.</p>
+      <div class="firma">— Los vecinos agradecidos</div>
+      <p><a class="boton azul" href="#">Leer la historia completa</a></p>
+    </div>
+  </div>
+  <div class="guardapolvo" style="--h:90px;--c:var(--rosa);--c2:var(--turquesa)"><i class="pintura"></i></div>
+</section>
+
+<!-- ============ MERCH ============ -->
+<section id="merch" class="seccion muro turquesa" style="padding-top:0">
+  <div class="toldo" aria-hidden="true"></div>
+  <span class="fantasma" style="font-size:9vw;bottom:14%;right:-2%;color:var(--tinta);opacity:.06">Recargas · copias</span>
+  <div class="hueco" style="width:200px;height:130px;left:-30px;bottom:48px"></div>
+  <div class="c">
+    <div class="abarrotes pintura revela">
+      <small class="pincel">Abarrotes y novedades</small>
+      <span class="ranchers l-amarillo pincel">“Los Azules”</span>
+    </div>
+    <div class="anaquel revela">
+      <a class="producto" href="#"><div class="pieza pintura-suave"><div class="playera"><span>Azules</span></div></div><h3 class="pincel">Playera de la gira</h3><span class="lobster pincel">¡Llévela!</span></a>
+      <a class="producto" href="#"><div class="pieza pintura-suave"><div class="vinilo"></div></div><h3 class="pincel">Caja Ruta 40</h3><span class="lobster pincel">Sólo en México</span></a>
+      <a class="producto" href="#"><div class="pieza pintura-suave"><div class="gorra"></div></div><h3 class="pincel">Gorra bordada</h3><span class="lobster pincel">¡Hay tallas!</span></a>
+      <a class="producto" href="#"><div class="pieza pintura-suave"><div class="paliacate"></div></div><h3 class="pincel">Paliacate oficial</h3><span class="lobster pincel">Pa’l baile</span></a>
+    </div>
+    <div class="fiado revela"><span class="rye">Hoy no se fía, mañana sí</span><br><br><a class="boton" href="#">Entrar a la tienda oficial ☛</a></div>
+  </div>
+  <div class="guardapolvo" style="--h:96px;--c:var(--verde);--c2:var(--amarillo)"><i class="pintura"></i></div>
+</section>
+
+<!-- ============ AVISO ============ -->
+<section id="avisos" class="seccion muro">
+  <span class="fantasma" style="font-size:7vw;top:8%;right:2%;opacity:.07">Se rentan sillas y mesas</span>
+  <div class="hueco" style="width:200px;height:120px;right:4%;bottom:40px"></div>
+  <div class="c aviso-grid">
+    <div class="aviso revela">
+      <h2 class="pincel pintura">Aviso</h2>
+      <p class="chela pincel pintura-suave">Se avisa a la comunidad que las <b>preventas</b>, los <b>estrenos</b> y los <b>bailes cerca de usted</b> se anuncian primero por correo.</p>
+    </div>
+    <form class="formulario revela" id="form-avisos" novalidate>
+      <div class="campos" style="display:flex;flex-direction:column;gap:14px">
+        <label for="correo">Su correo</label>
+        <input id="correo" type="email" placeholder="sucorreo@ejemplo.com" required>
+        <label for="cp">Su ciudad o C.P.</label>
+        <input id="cp" type="text" placeholder="Iztapalapa, 09000">
+        <button class="boton" type="submit">¡Apúntenme!</button>
+      </div>
+      <p class="gracias">¡Ya quedó, vecino! Nos vemos en el baile ✦</p>
+    </form>
+  </div>
+  <div class="guardapolvo" style="--h:80px;--c:var(--rojo);--c2:var(--azul)"><i class="pintura"></i></div>
+</section>
+</main>
+
+<footer class="muro cemento">
+  <div class="hueco" style="width:170px;height:100px;right:10%;top:26px"></div>
+  <div class="c">
+    <div class="pie-grid">
+      <div><div class="ranchers l-rojo pincel pintura">No tire basura</div><div class="lobster pincel pintura-suave">¡sí baile cumbia!</div></div>
+      <div><h4>Secciones</h4><ul><li><a href="#tour">Bailes</a></li><li><a href="#musica">Música</a></li><li><a href="#video">Video</a></li><li><a href="#bio">Historia</a></li><li><a href="#merch">Merch</a></li></ul></div>
+      <div><h4>Síganos</h4><div class="redes"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Facebook</a><a href="#">X</a><a href="#">Spotify</a><a href="#">Apple Music</a><a href="#">YouTube</a></div></div>
+    </div>
+    <div class="legal"><span>Propuesta conceptual de rediseño · maqueta no oficial</span><span>Contrataciones · Prensa · Aviso de privacidad</span></div>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="Navegación móvil">
+  <a href="#inicio" class="activo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 11l9-7 9 7v9H3z"/></svg>Inicio</a>
+  <a href="#tour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 5h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg>Bailes</a>
+  <a href="#merch" class="merch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M8 3l-5 3 2 5 2-1v11h10V10l2 1 2-5-5-3a4 4 0 01-8 0z"/></svg>Merch</a>
+  <a href="#musica"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></svg>Música</a>
+  <a href="#video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="5" width="18" height="13" rx="3"/><path d="M10 9l5 2.5-5 2.5z" fill="currentColor"/></svg>Video</a>
+</nav>
+
+<script>
+// Fechas (ilustrativas)
+const fechas=[
+ {d:'14',m:'Mar',c:'Los Ángeles, Cal.',v:'Arena principal',p:'us'},
+ {d:'21',m:'Mar',c:'Houston, Tex.',v:'Pabellón del rodeo',p:'us'},
+ {d:'28',m:'Mar',c:'Chicago, Ill.',v:'Teatro del lago',p:'us',ago:true},
+ {d:'04',m:'Abr',c:'Ciudad de México',v:'Auditorio Nacional',p:'mx'},
+ {d:'11',m:'Abr',c:'Guadalajara, Jal.',v:'Arena de la ciudad',p:'mx'},
+ {d:'18',m:'Abr',c:'Nueva York, N.Y.',v:'Salón de conciertos',p:'us'}];
+const cont=document.getElementById('fechas');
+function pinta(f){
+  cont.innerHTML=fechas.filter(x=>f==='todos'||x.p===f).map(x=>`
+   <div class="baile">
+     <div class="dia"><b>${x.d}</b><span>${x.m}</span></div>
+     <div><h3>${x.c}</h3><p>${x.v}</p></div>
+     <div class="accion">${x.ago?'<span class="agotado">¡Agotado!</span>':'<a class="boton amarillo" href="#">Boletos ☛</a>'}</div>
+   </div>`).join('');
+}
+pinta('todos');
+document.querySelectorAll('.filtros button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filtros button').forEach(o=>o.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');pinta(b.dataset.f);
+}));
+
+// Letrero de "HAY:"
+const hay=[['Se Agradece','disco nuevo'],['Ruta 40','caja especial'],['Puras colaboraciones','playlist'],['Los clásicos de siempre','éxitos'],['Discos de vinil','en la tienda']];
+document.getElementById('hay').innerHTML=hay.map(h=>`<li><a href="#"><span>${h[0]}</span><em>${h[1]} ▶</em></a></li>`).join('');
+
+// Menú de videos
+const vids=[{n:'Primer tiempo',t:'Pa’ Él con Tini'},{n:'Segundo tiempo',t:'Se Agradece'},{n:'Guisado',t:'En vivo desde el Auditorio'},{n:'Postre',t:'Detrás del baile'}];
+const ol=document.getElementById('videos');
+ol.innerHTML=vids.map((v,i)=>`<li><button ${i===0?'aria-current="true"':''} data-i="${i}"><small>${v.n}</small><b>${v.t}</b></button></li>`).join('');
+ol.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  ol.querySelectorAll('button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','true');
+  document.getElementById('pantalla-t').textContent=vids[b.dataset.i].t.split(' con ')[0];});
+
+// Aviso
+document.getElementById('form-avisos').addEventListener('submit',e=>{e.preventDefault();
+  const c=document.getElementById('correo');if(!c.value.includes('@')){c.focus();c.style.borderColor='var(--rojo)';return;}
+  e.target.classList.add('ok');});
+
+
+// ================= MURO REALISTA =================
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const NS='http://www.w3.org/2000/svg';
+let uid=0;
+function contorno(cx,cy,rx,ry,n,R,jit){let p=[];for(let i=0;i<n;i++){const a=i/n*Math.PI*2,k=1-jit+jit*R();p.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k])}
+  return 'M'+p.map(q=>q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' L')+'Z'}
+function hueco(el,seed){
+  const w=el.offsetWidth,h=el.offsetHeight;if(!w)return;const R=rng(seed),id='h'+(uid++);
+  const hole=contorno(w/2,h/2,w*.43,h*.42,22,R,.32), ring=contorno(w/2,h/2,w*.49,h*.48,30,R,.3);
+  // tabique rojo recocido: 28x7 cm aprox -> 4:1
+  const bw=58,bh=15,j=4;let bricks='';
+  for(let y=-6,row=0;y<h+bh;y+=bh+j,row++){
+    for(let x=(row%2?-bw/2:0)-8;x<w+bw;x+=bw+j){
+      const t=R(),r=Math.round(150+t*45-(R()<.12?40:0)),g=Math.round(r*.42+R()*14),b=Math.round(r*.27+R()*10);
+      const bx=x+R()*2-1,by=y+R()*1.6-.8,bww=bw+R()*3-1.5;
+      bricks+=`<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bww.toFixed(1)}" height="${bh}" rx="1.6" fill="rgb(${r},${g},${b})"/>`+
+        `<rect x="${bx.toFixed(1)}" y="${(by+bh-2.4).toFixed(1)}" width="${bww.toFixed(1)}" height="2.4" fill="rgba(40,15,5,.35)"/>`+
+        `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bww.toFixed(1)}" height="1.6" fill="rgba(255,220,190,.18)"/>`;
+    }
+  }
+  el.innerHTML=`<svg viewBox="0 0 ${w} ${h}" xmlns="${NS}">
+   <defs>
+    <filter id="r${id}" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="3" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="g${id}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="${seed+3}"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0" intercept="1"/></feComponentTransfer></filter>
+    <filter id="b${id}"><feGaussianBlur stdDeviation="3.5"/></filter>
+    <mask id="m${id}"><path d="${hole}" fill="#fff" filter="url(#r${id})"/></mask>
+    <mask id="o${id}"><path d="${ring}" fill="#fff" filter="url(#r${id})"/></mask>
+   </defs>
+   <ellipse cx="${w/2}" cy="${h*.6}" rx="${w*.62}" ry="${h*.6}" fill="rgba(90,70,40,.16)" filter="url(#b${id})"/>
+   <g mask="url(#o${id})">
+     <rect width="${w}" height="${h}" fill="#8f897c"/>
+     <rect width="${w}" height="${h}" filter="url(#g${id})" opacity=".55" style="mix-blend-mode:multiply"/>
+     
+   </g>
+   <g mask="url(#m${id})">
+     <rect width="${w}" height="${h}" fill="#857a66"/>
+     ${bricks}
+     <rect width="${w}" height="${h}" filter="url(#g${id})" opacity=".5" style="mix-blend-mode:multiply"/>
+     <rect width="${w}" height="${h}" fill="rgba(210,200,180,.12)"/>
+     <path d="${hole}" fill="none" stroke="#000" stroke-width="18" opacity=".7" filter="url(#b${id})" transform="translate(5 6)"/>
+   </g>
+  </svg>`;
+}
+function grieta(svg){
+  const w=svg.clientWidth||svg.getBoundingClientRect().width,h=svg.clientHeight||svg.getBoundingClientRect().height;if(!w)return;
+  const R=rng(+svg.dataset.seed),up=svg.dataset.dir==='up';
+  svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  function camino(x,y,ang,len,paso){let d=`M${x.toFixed(1)} ${y.toFixed(1)}`,pts=[];
+    for(let l=0;l<len;l+=paso){ang+=(R()-.5)*.9;x+=Math.cos(ang)*paso;y+=Math.sin(ang)*paso;d+=` L${x.toFixed(1)} ${y.toFixed(1)}`;pts.push([x,y,ang])}return{d,pts}}
+  const base=up?-Math.PI/2:Math.PI/2;
+  const main=camino(w*.5,up?h:0,base+(R()-.5)*.4,h*.95,7+R()*5);let paths=[main.d];
+  for(let k=0;k<3;k++){const q=main.pts[Math.floor(R()*main.pts.length*.8)];if(q)paths.push(camino(q[0],q[1],q[2]+(R()<.5?-1:1)*(.6+R()*.5),h*(.15+R()*.25),5).d)}
+  svg.innerHTML=paths.map((d,i)=>`<path d="${d}" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="${i?1:1.4}" transform="translate(1 1)"/><path d="${d}" fill="none" stroke="rgba(55,40,25,.75)" stroke-width="${i?.8:1.3}" stroke-linejoin="round"/>`).join('');
+}
+function humedad(sec,seed){
+  const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','capa-muro');svg.setAttribute('viewBox','0 0 1600 1000');svg.setAttribute('preserveAspectRatio','none');
+  svg.innerHTML=`<defs>
+   <filter id="sal${seed}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".008 .03" numOctaves="3" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="160" xChannelSelector="R" yChannelSelector="G"/></filter>
+   <linearGradient id="gs${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e4a2c" stop-opacity=".0"/><stop offset=".12" stop-color="#5e4a2c" stop-opacity=".22"/><stop offset=".16" stop-color="#7d6a48" stop-opacity=".12"/><stop offset="1" stop-color="#3e3020" stop-opacity=".42"/></linearGradient>
+   <filter id="esc${seed}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".035 .002" numOctaves="3" seed="${seed+5}"/><feColorMatrix values="0 0 0 0 .32  0 0 0 0 .26  0 0 0 0 .16  0 0 0 -6 3.35"/></filter>
+   <linearGradient id="fd${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".35" stop-color="#000"/></linearGradient>
+   <mask id="mf${seed}"><rect width="1600" height="1000" fill="url(#fd${seed})"/></mask>
+   <filter id="man${seed}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".004 .006" numOctaves="4" seed="${seed+9}"/><feColorMatrix values="0 0 0 0 .4  0 0 0 0 .33  0 0 0 0 .2  0 0 0 2.2 -1.05"/></filter>
+  </defs>
+  <rect width="1600" height="1000" filter="url(#man${seed})" opacity=".5"/>
+  <rect width="1600" height="1000" filter="url(#esc${seed})" mask="url(#mf${seed})" opacity=".28"/>
+  <rect x="-200" y="${790+Math.round(rng(seed)()*60)}" width="2000" height="500" fill="url(#gs${seed})" filter="url(#sal${seed})"/>`;
+  sec.prepend(svg);
+}
+document.querySelectorAll('.muro').forEach((m,i)=>humedad(m,i*7+3));
+const pintaMuro=()=>{document.querySelectorAll('.hueco').forEach((h,i)=>hueco(h,i*13+5));document.querySelectorAll('.grieta').forEach(grieta)};
+pintaMuro();
+
+// Revelado + pestaña activa
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visto');io.unobserve(en.target)}}),{threshold:.1});
+document.querySelectorAll('.revela').forEach(el=>io.observe(el));
+const tabs=[...document.querySelectorAll('.tabbar a')];
+const so=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)tabs.forEach(t=>t.classList.toggle('activo',t.getAttribute('href')==='#'+en.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+['inicio','tour','musica','video','merch'].forEach(id=>so.observe(document.getElementById(id)));
+</script>
+</body>
+</html>

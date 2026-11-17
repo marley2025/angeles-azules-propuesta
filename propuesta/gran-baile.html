@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Los Ángeles Azules · Gran Baile</title>
+<meta name="description" content="Propuesta C: barda de block pintada de noche, anuncio de baile con letra cromada sonidera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee&family=Kaushan+Script&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --k:#0b0a14; --noche:#1c2557; --rosa:#ff3fa4; --cian:#35e0ff; --lima:#c6ff3d; --naranja:#ff8a1f; --amarillo:#ffe14a; --blanco:#fbf7ef;
+  --cromo:linear-gradient(180deg,#0d1f7a 0%,#2f6dff 22%,#9fd6ff 46%,#ffffff 49.5%,#7a2a8a 50.5%,#ff4fa8 66%,#ffb347 86%,#fff27a 100%);
+  --oro:linear-gradient(180deg,#fff8c4 0%,#ffd84a 40%,#ffd84a 49%,#e88a12 51%,#ffb63d 78%,#fff0a0 100%);
+  --neonrosa:linear-gradient(180deg,#ffd2ea 0%,#ff5bb5 48%,#d01f86 52%,#ff7ac4 100%);
+  --neoncian:linear-gradient(180deg,#e8fdff 0%,#58e6ff 48%,#1a9ad8 52%,#7ff0ff 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{position:relative;background:var(--noche);color:var(--blanco);font-family:"Work Sans",system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+.muro-listo body{background:var(--muro) 0 0/var(--tw) var(--th)}
+.relieve{position:absolute;inset:0;pointer-events:none;z-index:40;mix-blend-mode:multiply}
+.muro-listo .relieve{background:var(--relieve) 0 0/var(--tw) var(--th)}
+/* luz de poste: ilumina la barda y lo pintado */
+.luz{position:absolute;left:0;right:0;top:0;height:1500px;pointer-events:none;z-index:41;mix-blend-mode:screen;
+  background:radial-gradient(ellipse 48% 42% at 78% 4%,rgba(255,190,110,.42),rgba(255,160,80,.16) 45%,transparent 75%),
+             radial-gradient(ellipse 70% 60% at 50% 30%,rgba(120,140,255,.10),transparent 70%)}
+.oscuro{position:absolute;inset:0;pointer-events:none;z-index:42;background:radial-gradient(ellipse 120% 70% at 50% 0,transparent 55%,rgba(5,6,20,.18))}
+a{color:inherit}
+img{max-width:100%;display:block}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:4px dashed var(--lima);outline-offset:4px}
+
+/* ---------- Rótulo cromado por capas ---------- */
+.rotulo{--o:.07em;--b:var(--rosa);--l:#fff;--g:var(--cromo);--lh:.95em;
+  display:grid;justify-items:center;text-align:center;font-family:"Bungee",sans-serif;font-weight:400;text-transform:uppercase;
+  line-height:var(--lh);letter-spacing:.01em;padding:.16em .2em .3em;filter:url(#mano);transform:skewX(-7deg)}
+.rotulo>span{grid-area:1/1;position:relative}
+.r-sombra{color:var(--k);-webkit-text-stroke:calc(var(--o)*2.6) var(--k);
+  text-shadow:.01em .01em 0 var(--k),.02em .02em 0 var(--k),.03em .03em 0 var(--k),.04em .04em 0 var(--k),.05em .05em 0 var(--k),.06em .06em 0 var(--k),.07em .07em 0 var(--k),.08em .08em 0 var(--k)}
+.r-borde{color:var(--k);-webkit-text-stroke:calc(var(--o)*2.6) var(--k)}
+.r-filo{color:var(--b);-webkit-text-stroke:calc(var(--o)*2) var(--b)}
+.r-linea{color:var(--l);-webkit-text-stroke:calc(var(--o)*.7) var(--l)}
+.r-relleno{background:var(--g) 0 -.05em/100% var(--lh) repeat-y;-webkit-background-clip:text;background-clip:text;color:transparent}
+.rotulo.script{font-family:"Kaushan Script",cursive;text-transform:none;--o:.06em;--b:var(--k);--l:var(--k);--g:var(--neonrosa);--lh:1.15em;transform:rotate(-4deg);padding:.1em .3em .2em}
+.rotulo.script .r-relleno{background-position:0 .2em}
+.rotulo.script .r-sombra{text-shadow:.03em .04em 0 var(--k),.05em .06em 0 var(--k)}
+
+.bebas{font-family:"Bebas Neue",sans-serif;letter-spacing:.04em;line-height:.95}
+.kaushan{font-family:"Kaushan Script",cursive}
+.neon{color:#fff;text-shadow:0 0 .06em #fff,0 0 .25em var(--c,var(--rosa)),0 0 .6em var(--c,var(--rosa))}
+.pintado{color:var(--c,var(--amarillo));text-shadow:.05em .06em 0 var(--k);filter:url(#mano)}
+
+.brillo{position:absolute;width:var(--s,40px);aspect-ratio:1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 0C21 14 26 19 40 20 26 21 21 26 20 40 19 26 14 21 0 20 14 19 19 14 20 0Z' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.8))}
+
+.boton{display:inline-block;font-family:"Bungee";font-size:clamp(1rem,1.6vw,1.2rem);text-transform:uppercase;text-decoration:none;color:var(--k);
+  background:var(--lima);border:3px solid var(--k);padding:.55em 1.1em .45em;box-shadow:0 0 0 3px var(--blanco),6px 7px 0 3px var(--k);border-radius:999px;
+  transform:skewX(-7deg);filter:url(#mano);transition:transform .15s;cursor:pointer}
+.boton:hover{transform:skewX(-7deg) translateY(-3px)}
+.boton.rosa{background:var(--rosa);color:#fff}.boton.cian{background:var(--cian)}.boton.amarillo{background:var(--amarillo)}.boton.naranja{background:var(--naranja)}
+
+.envoltura{width:min(1180px,100% - 32px);margin-inline:auto}
+section{position:relative;padding:clamp(60px,9vw,120px) 0}
+.titular{text-align:center;margin-bottom:clamp(24px,4vw,44px);position:relative}
+.titular .rotulo{font-size:clamp(2.6rem,7.4vw,6.2rem)}
+.titular .sub{font-family:"Kaushan Script";font-size:clamp(1.3rem,2.6vw,2rem);color:var(--amarillo);text-shadow:.05em .06em 0 var(--k);filter:url(#mano)}
+
+/* ---------- Tope ---------- */
+.tope{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
+.tope .marca img{width:96px}
+.tope nav{display:flex;flex-wrap:wrap;gap:6px 24px}
+.tope nav a{font-family:"Bebas Neue";font-size:1.55rem;letter-spacing:.06em;text-decoration:none;filter:url(#mano)}
+.tope nav a:nth-child(4n+1){color:var(--rosa)}.tope nav a:nth-child(4n+2){color:var(--cian)}.tope nav a:nth-child(4n+3){color:var(--lima)}.tope nav a:nth-child(4n){color:var(--amarillo)}
+.tope nav a:hover{text-decoration:underline;text-underline-offset:5px}
+.idioma{font-family:"Bebas Neue";font-size:1.4rem;letter-spacing:.06em}
+
+/* ---------- Héroe: anuncio de baile ---------- */
+.poste{position:absolute;right:0;top:78px;width:clamp(120px,16vw,210px);z-index:43;pointer-events:none}
+.heroe{text-align:center;padding-top:clamp(10px,3vw,40px)}
+.heroe .avisa{font-family:"Bebas Neue";font-size:clamp(1.3rem,2.6vw,2rem);letter-spacing:.2em;color:var(--blanco);text-shadow:.05em .06em 0 var(--k);filter:url(#mano)}
+.heroe .gran{font-size:clamp(3.6rem,13vw,11rem)}
+.heroe .amen{font-size:clamp(2rem,4.6vw,3.6rem);margin-top:-.25em}
+.heroe .logo{width:min(440px,76vw);margin:-4px auto 0;filter:url(#mano) drop-shadow(6px 8px 0 rgba(11,10,20,.9))}
+.cuando{margin-top:10px}
+.cuando .dia{font-family:"Bebas Neue";font-size:clamp(2.8rem,8vw,6.4rem);line-height:.9;color:var(--amarillo);text-shadow:.03em .04em 0 var(--rosa),.06em .08em 0 var(--k);filter:url(#mano)}
+.cuando .donde{font-family:"Bungee";font-size:clamp(1rem,2.2vw,1.6rem);color:var(--cian);text-shadow:.06em .07em 0 var(--k);filter:url(#mano)}
+.heroe .ctas{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.letrita{font-family:"Kaushan Script";font-size:clamp(1.05rem,1.8vw,1.35rem);color:var(--blanco);opacity:.92;margin-top:26px;text-shadow:.05em .06em 0 var(--k)}
+.estrellas .brillo:nth-child(1){left:8%;top:22%;--s:46px}.estrellas .brillo:nth-child(2){right:12%;top:40%;--s:30px}
+.estrellas .brillo:nth-child(3){left:16%;top:58%;--s:26px}.estrellas .brillo:nth-child(4){right:20%;top:12%;--s:22px}
+
+/* ---------- Gira: carteles pintados ---------- */
+.carteles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,34px)}
+.cartel{position:relative;padding:22px 20px 24px;text-align:center;color:var(--k)}
+.cartel::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--p);border:4px solid var(--k);box-shadow:8px 9px 0 var(--k);filter:url(#orilla)}
+.cartel::after{content:"";position:absolute;inset:9px;z-index:-1;border:2px dashed rgba(11,10,20,.55);filter:url(#orilla)}
+.cartel .ciudad{font-family:"Bungee";font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.05;margin-bottom:4px}
+.cartel .num{font-family:"Bebas Neue";font-size:clamp(5rem,9vw,7.2rem);line-height:.8;color:#fff;-webkit-text-stroke:.03em var(--k);paint-order:stroke fill;text-shadow:.04em .05em 0 var(--k)}
+.cartel .mes{font-family:"Kaushan Script";font-size:1.6rem;line-height:1}
+.cartel .lugar{font-family:"Bebas Neue";font-size:1.35rem;letter-spacing:.06em;margin:6px 0 14px}
+.cartel .boton{box-shadow:4px 5px 0 var(--k)}
+.cartel .agotado{display:inline-block;font-family:"Bungee";font-size:1.15rem;color:#fff;background:var(--k);padding:.35em .9em;transform:rotate(-6deg)}
+.filtros{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:-10px 0 30px}
+.filtros button{font-family:"Bebas Neue";font-size:1.5rem;letter-spacing:.06em;background:none;border:0;color:var(--blanco);cursor:pointer;padding:.1em .5em;opacity:.6}
+.filtros button[aria-pressed="true"]{opacity:1;color:var(--lima);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.nota{text-align:center;font-size:.85rem;opacity:.7;margin-top:22px}
+
+/* ---------- Música ---------- */
+.estreno{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,64px);align-items:center}
+.estreno .izq{text-align:center;position:relative}
+.estrella-precio{display:inline-grid;place-items:center;width:clamp(120px,14vw,160px);aspect-ratio:1;color:var(--k);font-family:"Bungee";font-size:clamp(1rem,1.7vw,1.3rem);line-height:1;transform:rotate(-12deg);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 2 58 20 76 8 75 29 96 26 84 43 100 52 82 61 92 79 72 77 70 98 55 84 44 100 37 80 18 90 21 70 1 66 16 51 3 34 24 32 21 11 40 20Z' fill='%23ffe14a' stroke='%230b0a14' stroke-width='3'/%3E%3C/svg%3E") center/contain no-repeat;filter:url(#mano)}
+.estreno .titulo{font-size:clamp(5rem,15vw,12rem);--g:var(--oro);--b:var(--cian)}
+.estreno .con{font-size:clamp(2.2rem,5vw,3.8rem);--g:var(--neoncian);margin-top:-.4em}
+.plataformas{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:26px}
+.discos{position:relative;padding:28px 26px;color:var(--k)}
+.discos::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--blanco);border:4px solid var(--k);box-shadow:8px 9px 0 var(--rosa),8px 9px 0 3px var(--k);filter:url(#orilla);border-radius:6px}
+.discos h3{font-family:"Bungee";font-weight:400;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1;color:var(--rosa);text-shadow:.05em .06em 0 var(--k);transform:skewX(-7deg)}
+.discos ul{list-style:none;margin-top:10px}
+.discos li a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:10px 0;border-bottom:2px dashed rgba(11,10,20,.3);text-decoration:none}
+.discos li:last-child a{border:0}
+.discos li span{font-family:"Kaushan Script";font-size:clamp(1.25rem,2.2vw,1.6rem);line-height:1.1}
+.discos li em{font-style:normal;font-family:"Bebas Neue";font-size:1.2rem;letter-spacing:.06em;white-space:nowrap;color:#1b49c9}
+
+/* ---------- Video ---------- */
+.video-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(20px,4vw,48px);align-items:center}
+.pantalla{position:relative;z-index:45;aspect-ratio:16/9;background:#05050c;border:6px solid var(--k);border-radius:10px;overflow:hidden;display:grid;place-items:center;
+  box-shadow:0 0 0 5px var(--rosa),0 0 0 9px var(--k),0 0 50px rgba(255,63,164,.45)}
+.pantalla::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 30%,#2b2a8f,transparent 60%),radial-gradient(circle at 76% 72%,#8a1660,transparent 55%)}
+.pantalla .play{position:relative;width:92px;height:92px;border-radius:50%;background:var(--lima);border:4px solid var(--k);display:grid;place-items:center;cursor:pointer;box-shadow:5px 6px 0 var(--k)}
+.pantalla .play::after{content:"";border-left:28px solid var(--k);border-top:17px solid transparent;border-bottom:17px solid transparent;margin-left:8px}
+.pantalla .t{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:"Kaushan Script";font-size:clamp(1.6rem,3.4vw,2.6rem)}
+.videos{list-style:none}
+.videos button{width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:12px 0;border-bottom:2px solid rgba(251,247,239,.25);color:var(--blanco);font:inherit}
+.videos small{display:block;font-family:"Bebas Neue";letter-spacing:.1em;font-size:1.1rem;color:var(--cian)}
+.videos b{display:block;font-family:"Bungee";font-weight:400;font-size:clamp(1.05rem,2vw,1.4rem);line-height:1.15;text-shadow:.05em .06em 0 var(--k)}
+.videos button[aria-current="true"] b{color:var(--lima)}
+.videos button[aria-current="true"] b::before{content:"▶ "}
+
+/* ---------- Historia ---------- */
+.linea-tiempo{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,34px);position:relative;text-align:center}
+.linea-tiempo::before{content:"";position:absolute;left:12%;right:12%;top:58px;height:6px;background:var(--amarillo);box-shadow:0 3px 0 var(--k);filter:url(#orilla)}
+.hito .bola{width:118px;height:118px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;position:relative;background:var(--c);border:4px solid var(--k);box-shadow:5px 6px 0 var(--k);filter:url(#orilla)}
+.hito .bola b{font-family:"Bebas Neue";font-weight:400;font-size:2.4rem;color:var(--k)}
+.hito h3{font-family:"Bungee";font-weight:400;font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.1;text-shadow:.05em .06em 0 var(--k)}
+.hito p{max-width:30ch;margin:8px auto 0;font-size:1rem;opacity:.92}
+.historia-texto{max-width:64ch;margin:44px auto 0;text-align:center;font-size:clamp(1.02rem,1.6vw,1.15rem)}
+
+/* ---------- Tienda ---------- */
+.productos{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,34px)}
+.producto{position:relative;display:block;text-decoration:none;text-align:center;padding:22px 18px 26px;color:var(--k)}
+.producto::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--p);border:4px solid var(--k);box-shadow:7px 8px 0 var(--k);filter:url(#orilla);border-radius:14px}
+.producto svg{width:100%;max-width:200px;height:auto;margin:0 auto 6px;filter:url(#mano)}
+.producto h3{font-family:"Bungee";font-weight:400;font-size:clamp(1rem,1.9vw,1.35rem);line-height:1.1}
+.producto .precio{display:inline-block;font-family:"Bebas Neue";font-size:2.1rem;line-height:1;margin-top:6px;color:#fff;-webkit-text-stroke:.03em var(--k);paint-order:stroke fill;text-shadow:.05em .05em 0 var(--k)}
+.tienda-pie{text-align:center;margin-top:34px}
+.tienda-pie p{font-family:"Kaushan Script";font-size:clamp(1.3rem,2.6vw,2rem);color:var(--amarillo);text-shadow:.05em .06em 0 var(--k);margin-bottom:16px}
+
+/* ---------- Aviso ---------- */
+.aviso{text-align:center;max-width:820px;margin:0 auto}
+.aviso .intro{font-family:"Bebas Neue";font-size:clamp(1.4rem,2.8vw,2rem);letter-spacing:.05em;margin:0 0 22px}
+.forma{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;position:relative;z-index:45}
+.forma input{font:500 1.05rem "Work Sans";padding:14px 18px;border:3px solid var(--k);background:var(--blanco);color:var(--k);border-radius:999px;min-width:0;box-shadow:0 0 0 3px var(--cian)}
+.forma .ok-msj{display:none}
+.forma.ok>*{display:none}
+.forma.ok .ok-msj{display:block;grid-column:1/-1;font-family:"Kaushan Script";font-size:2rem;color:var(--lima)}
+
+/* ---------- Pie ---------- */
+.guardapolvo{position:relative;margin-top:40px;padding:46px 0 calc(40px + env(safe-area-inset-bottom));text-align:center;color:var(--k)}
+.guardapolvo::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--rosa);filter:url(#orilla)}
+.guardapolvo::after{content:"";position:absolute;left:0;right:0;top:0;height:12px;z-index:-1;background:var(--amarillo);filter:url(#orilla)}
+.guardapolvo .prohibido{font-family:"Bungee";font-size:clamp(1.2rem,3vw,2.2rem);line-height:1.05}
+.guardapolvo .prohibido small{display:block;font-family:"Kaushan Script";font-size:.6em;margin-top:4px}
+.redes{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 24px;margin:20px 0 8px}
+.redes a{font-family:"Bebas Neue";font-size:1.5rem;letter-spacing:.06em;text-decoration:none}
+.legal{font-size:.85rem}
+
+.tabbar{display:none}
+@media (max-width:760px){
+  .tope nav,.tope .idioma{display:none}
+  .tope .marca img{width:78px}
+  .poste{width:84px;top:0}
+  .carteles{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 16px 22px;margin:0 -16px;scrollbar-width:none}
+  .cartel{scroll-snap-align:center}
+  .estreno,.video-grid{grid-template-columns:1fr}
+  .linea-tiempo{grid-template-columns:1fr;gap:30px}
+  .linea-tiempo::before{left:50%;right:auto;width:6px;top:0;bottom:0;height:auto;transform:translateX(-50%)}
+  .hito{background:transparent}
+  .productos{grid-template-columns:1fr 1fr}
+  .productos .producto:last-child{grid-column:1/-1}
+  .forma{grid-template-columns:1fr}
+  body{padding-bottom:78px}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--k);border-top:3px solid var(--rosa);padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;font-family:"Bebas Neue";letter-spacing:.06em;font-size:1.05rem;color:var(--blanco)}
+  .tabbar a i{font-style:normal;font-size:1.2rem;line-height:1;color:var(--cian)}
+  .tabbar .sello{margin-top:-28px}
+  .tabbar .sello i{width:58px;height:58px;border-radius:50%;background:var(--lima);color:var(--k);border:3px solid var(--k);box-shadow:0 0 0 3px var(--rosa);display:grid;place-items:center;font-size:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.boton{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="mano" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="orilla" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="2"/><feDisplacementMap in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
+</svg>
+
+<!-- poste de luz -->
+<svg class="poste" viewBox="0 0 200 230" aria-hidden="true">
+  <defs><radialGradient id="foco" cx=".5" cy=".3" r=".7"><stop offset="0" stop-color="#fff6d8"/><stop offset=".5" stop-color="#ffcf7a"/><stop offset="1" stop-color="#e98a2c"/></radialGradient></defs>
+  <path d="M196 0v40c0 10-8 16-18 16H118" fill="none" stroke="#2a2a33" stroke-width="9" stroke-linecap="round"/>
+  <path d="M70 52h80l-10 26H80Z" fill="#3a3a44" stroke="#15151b" stroke-width="3"/>
+  <ellipse cx="110" cy="80" rx="30" ry="8" fill="url(#foco)"/>
+  <ellipse cx="110" cy="80" rx="46" ry="14" fill="#ffd38a" opacity=".25"/>
+</svg>
+
+<div class="envoltura">
+  <header class="tope">
+    <a class="marca" href="#inicio"><img src="assets/logo-laa.webp" alt="Los Ángeles Azules, inicio"></a>
+    <nav aria-label="Principal"><a href="#gira">Gira</a><a href="#musica">Música</a><a href="#video">Video</a><a href="#historia">Historia</a><a href="#tienda">Tienda</a><a href="#aviso">Avisos</a></nav>
+    <div class="idioma"><b>ES</b> / <a href="#">EN</a></div>
+  </header>
+</div>
+
+<main>
+<section id="inicio" class="heroe">
+  <div class="estrellas" aria-hidden="true"><i class="brillo"></i><i class="brillo"></i><i class="brillo"></i><i class="brillo"></i></div>
+  <div class="envoltura">
+    <h1 class="sr">Los Ángeles Azules: próximo baile</h1>
+    <p class="avisa">★ La empresa se complace en invitarle al ★</p>
+    <p class="rotulo gran" aria-hidden="true">¡Gran Baile!</p>
+    <p class="rotulo script amen">amenizado por</p>
+    <img class="logo" src="assets/logo-laa.webp" alt="Los Ángeles Azules">
+    <div class="cuando">
+      <p class="dia" id="h-dia">Sábado 4 de abril</p>
+      <p class="donde" id="h-donde">Auditorio Nacional · Ciudad de México</p>
+    </div>
+    <div class="ctas"><a class="boton" href="#">Boletos ya ☛</a><a class="boton rosa" href="#gira">Ver toda la gira</a></div>
+    <p class="letrita">Se aceptan parejas, solteros, comadres y compadres. ¡No falte!</p>
+  </div>
+</section>
+
+<section id="gira">
+  <div class="envoltura">
+    <div class="titular"><h2 class="rotulo" style="--g:var(--neoncian);--b:var(--rosa)">La gira</h2><p class="sub">¿Cuándo llegan a tu ciudad?</p></div>
+    <div class="filtros" role="group" aria-label="Filtrar por país"><button aria-pressed="true" data-f="todos">Todas</button><button aria-pressed="false" data-f="mx">México</button><button aria-pressed="false" data-f="us">Estados Unidos</button></div>
+    <div class="carteles" id="carteles"></div>
+    <p class="nota">Fechas ilustrativas · en producción se actualizan solas (Bandsintown) y el anuncio de arriba siempre muestra el próximo baile</p>
+  </div>
+</section>
+
+<section id="musica">
+  <div class="envoltura estreno">
+    <div class="izq">
+      <span class="estrella-precio">¡Estreno!</span>
+      <h2 class="rotulo titulo">Pa’ Él</h2>
+      <p class="rotulo script con">con Tini</p>
+      <div class="plataformas"><a class="boton" href="#">Spotify</a><a class="boton rosa" href="#">Apple Music</a><a class="boton amarillo" href="#">YouTube</a><a class="boton cian" href="#">Amazon</a></div>
+    </div>
+    <div class="discos"><h3>Y también:</h3><ul id="hay"></ul></div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="envoltura">
+    <div class="titular"><h2 class="rotulo" style="--g:var(--neonrosa);--b:var(--cian)">Pantalla</h2><p class="sub">Videos, en vivo y detrás del baile</p></div>
+    <div class="video-grid">
+      <div class="pantalla"><button class="play" aria-label="Reproducir video"></button><p class="t neon" id="pantalla-t" style="--c:var(--rosa)">Pa’ Él</p></div>
+      <ol class="videos" id="videos"></ol>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="envoltura">
+    <div class="titular"><h2 class="rotulo" style="--g:var(--oro);--b:var(--rosa)">La historia</h2><p class="sub">De los hermanos Mejía Avante</p></div>
+    <div class="linea-tiempo">
+      <div class="hito"><div class="bola" style="--c:var(--lima)"><b>1976</b></div><h3>Nace en Iztapalapa</h3><p>Los hermanos arman el grupo en casa y empiezan a tocar en fiestas del barrio.</p></div>
+      <div class="hito"><div class="bola" style="--c:var(--cian)"><b>Gira</b></div><h3>De pueblo en pueblo</h3><p>Salones, ferias y bardas pintadas con su nombre por todo el país.</p></div>
+      <div class="hito"><div class="bola" style="--c:var(--rosa)"><b>Hoy</b></div><h3>Cumbia sinfónica</h3><p>Orquesta, colaboraciones y escenarios en todo el mundo.</p></div>
+    </div>
+    <p class="historia-texto">Textos de ejemplo: en producción se editan desde el CMS, en español e inglés.</p>
+  </div>
+</section>
+
+<section id="tienda">
+  <div class="envoltura">
+    <div class="titular"><h2 class="rotulo" style="--g:var(--cromo);--b:var(--lima)">La tiendita</h2><p class="sub">Lo oficial, directo de la banda</p></div>
+    <div class="productos">
+      <a class="producto" href="#" style="--p:var(--cian)">
+        <svg viewBox="0 0 200 170" aria-hidden="true"><path d="M62 18 30 30 8 66l26 14 12-18v96h108V62l12 18 26-14-22-36-32-12c-6 14-20 22-38 22S68 32 62 18Z" fill="#1c2557" stroke="#0b0a14" stroke-width="5" stroke-linejoin="round"/><text x="100" y="114" text-anchor="middle" font-family="Kaushan Script" font-size="26" fill="#ff3fa4">Azules</text></svg>
+        <h3>Playera de gira</h3><span class="precio">$450</span></a>
+      <a class="producto" href="#" style="--p:var(--amarillo)">
+        <svg viewBox="0 0 200 170" aria-hidden="true"><path d="M38 104c0-44 28-72 64-72s62 28 62 70Z" fill="#ff3fa4" stroke="#0b0a14" stroke-width="5"/><path d="M26 104h170c4 14-10 22-28 22H40c-12 0-18-10-14-22Z" fill="#1c2557" stroke="#0b0a14" stroke-width="5" stroke-linejoin="round"/><circle cx="102" cy="30" r="7" fill="#0b0a14"/><text x="100" y="88" text-anchor="middle" font-family="Bungee" font-size="20" fill="#fff">LAA</text></svg>
+        <h3>Gorra bordada</h3><span class="precio">$380</span></a>
+      <a class="producto" href="#" style="--p:var(--lima)">
+        <svg viewBox="0 0 200 170" aria-hidden="true"><circle cx="100" cy="85" r="74" fill="#0b0a14"/><circle cx="100" cy="85" r="60" fill="none" stroke="#2c2b38" stroke-width="2"/><circle cx="100" cy="85" r="46" fill="none" stroke="#2c2b38" stroke-width="2"/><circle cx="100" cy="85" r="28" fill="#ff3fa4" stroke="#0b0a14" stroke-width="4"/><circle cx="100" cy="85" r="5" fill="#fbf7ef"/></svg>
+        <h3>Disco de vinil</h3><span class="precio">$690</span></a>
+    </div>
+    <div class="tienda-pie"><p>Envíos a México y Estados Unidos</p><a class="boton amarillo" href="#">Entrar a la tienda ☛</a></div>
+  </div>
+</section>
+
+<section id="aviso">
+  <div class="envoltura aviso">
+    <div class="titular" style="margin-bottom:6px"><h2 class="rotulo" style="--g:var(--neonrosa);--b:var(--amarillo);font-size:clamp(2rem,5.6vw,4.4rem)">¡Que no te lo cuenten!</h2></div>
+    <p class="intro">Te avisamos cuando el baile llegue a tu ciudad</p>
+    <form class="forma" id="forma" novalidate>
+      <label class="sr" for="correo">Correo</label><input id="correo" type="email" placeholder="Tu correo" autocomplete="email">
+      <label class="sr" for="ciudad">Ciudad</label><input id="ciudad" placeholder="Tu ciudad" autocomplete="address-level2">
+      <button class="boton" type="submit">Avísenme</button>
+      <p class="ok-msj">¡Listo! Nos vemos en el baile.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="guardapolvo">
+  <div class="envoltura">
+    <p class="prohibido">Prohibido anunciar en esta barda<small>…excepto bailes de Los Ángeles Azules</small></p>
+    <nav class="redes" aria-label="Redes"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">YouTube</a><a href="#">Facebook</a><a href="#">Spotify</a></nav>
+    <p class="legal">© 2026 Los Ángeles Azules · Contrataciones · Aviso de privacidad</p>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="Navegación móvil">
+  <a href="#inicio"><i>★</i>Baile</a><a href="#gira"><i>◆</i>Gira</a><a class="sello" href="#tienda"><i>$</i>Tienda</a><a href="#musica"><i>♫</i>Música</a><a href="#video"><i>▶</i>Video</a>
+</nav>
+
+<div class="relieve" aria-hidden="true"></div>
+<div class="luz" aria-hidden="true"></div>
+<div class="oscuro" aria-hidden="true"></div>
+
+<script src="assets/barda.js"></script>
+<script>
+Barda.rotulos();
+Barda.aplica({seed:23,cols:6,rows:9,bw:196,bh:92,j:9,radio:2,pintura:[31,42,92],varia:5,manchas:1.4,tinteMancha:[8,10,24],
+  junta:.66,sombra:.6,bisel:.12,ruido:26,grano:.4,poros:1.3,chips:.12,chipColor:[118,118,114],aparejo:.5},.6);
+
+const fechas=[
+ {d:'14',m:'Marzo',dia:'Sábado',c:'Los Ángeles, Cal.',v:'Arena principal',p:'us'},
+ {d:'21',m:'Marzo',dia:'Sábado',c:'Houston, Tex.',v:'Pabellón del rodeo',p:'us'},
+ {d:'28',m:'Marzo',dia:'Sábado',c:'Chicago, Ill.',v:'Teatro del lago',p:'us',ago:true},
+ {d:'04',m:'Abril',dia:'Sábado',c:'Ciudad de México',v:'Auditorio Nacional',p:'mx'},
+ {d:'11',m:'Abril',dia:'Sábado',c:'Guadalajara, Jal.',v:'Arena de la ciudad',p:'mx'},
+ {d:'18',m:'Abril',dia:'Sábado',c:'Nueva York, N.Y.',v:'Salón de conciertos',p:'us'}];
+const colores=['var(--amarillo)','var(--rosa)','var(--lima)','var(--cian)','var(--naranja)','#b88cff'];
+const cont=document.getElementById('carteles');
+function pinta(f){cont.innerHTML=fechas.filter(x=>f==='todos'||x.p===f).map((x,i)=>`
+  <article class="cartel" style="--p:${colores[i%colores.length]}">
+    <p class="ciudad">${x.c}</p><p class="num">${x.d}</p><p class="mes">de ${x.m}</p><p class="lugar">${x.v}</p>
+    ${x.ago?'<span class="agotado">¡Agotado!</span>':'<a class="boton amarillo" href="#">Boletos ☛</a>'}
+  </article>`).join('');}
+pinta('todos');
+document.querySelectorAll('.filtros button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filtros button').forEach(o=>o.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');pinta(b.dataset.f);}));
+// el anuncio del héroe siempre muestra el próximo baile
+const prox=fechas.find(f=>!f.ago);
+document.getElementById('h-dia').textContent=`${prox.dia} ${+prox.d} de ${prox.m.toLowerCase()}`;
+document.getElementById('h-donde').textContent=`${prox.v} · ${prox.c}`;
+
+const hay=[['Se Agradece','disco nuevo'],['Ruta 40','caja especial'],['Puras colaboraciones','playlist'],['Los clásicos de siempre','éxitos'],['Discos de vinil','en la tienda']];
+document.getElementById('hay').innerHTML=hay.map(h=>`<li><a href="#"><span>${h[0]}</span><em>${h[1]} ▶</em></a></li>`).join('');
+
+const vids=[{n:'Estreno',t:'Pa’ Él con Tini'},{n:'Disco nuevo',t:'Se Agradece'},{n:'En vivo',t:'Desde el Auditorio'},{n:'Detrás del baile',t:'Así se pinta una barda'}];
+const ol=document.getElementById('videos');
+ol.innerHTML=vids.map((v,i)=>`<li><button ${i?'':'aria-current="true"'} data-i="${i}"><small>${v.n}</small><b>${v.t}</b></button></li>`).join('');
+ol.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  ol.querySelectorAll('button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','true');
+  document.getElementById('pantalla-t').textContent=vids[b.dataset.i].t.split(' con ')[0];});
+
+document.getElementById('forma').addEventListener('submit',e=>{e.preventDefault();
+  const c=document.getElementById('correo');if(!c.value.includes('@')){c.focus();c.style.borderColor='var(--rosa)';return;}
+  e.target.classList.add('ok');});
+</script>
+</body>
+</html>
