@@ -44,6 +44,8 @@ a{color:inherit}
 .pc .barra{height:26px;display:flex;gap:6px;align-items:center;padding-left:10px}
 .pc .barra i{width:10px;height:10px;border-radius:50%;background:var(--rojo)}.pc .barra i:nth-child(2){background:var(--amarillo)}.pc .barra i:nth-child(3){background:#2E8B3E}
 .marco{position:relative;overflow:hidden;background:var(--cal)}
+.marco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.marco iframe{opacity:0;transition:opacity .4s}.marco iframe.lista{opacity:1}
 .marco iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none}
 .pc,.cel{display:block;transition:translate .2s}.pc:hover,.cel:hover{translate:0 -4px}
 .pc .marco{aspect-ratio:1440/900}
@@ -79,8 +81,8 @@ footer .script{font-family:"Lobster";color:var(--amarillo);font-size:1.8rem;disp
       <a class="abrir" href="index.html">Abrir propuesta ☛</a>
     </div>
     <div class="vistas">
-      <a class="pc" href="index.html" aria-label="Abrir propuesta A"><div class="barra"><i></i><i></i><i></i></div><div class="marco"><iframe data-src="index.html" title="Propuesta A en computadora" tabindex="-1" loading="lazy"></iframe></div></a>
-      <div><a class="cel" href="index.html" aria-label="Abrir propuesta A"><div class="marco"><iframe data-src="index.html" title="Propuesta A en celular" tabindex="-1" loading="lazy"></iframe></div></a><span class="etiqueta">En celular</span></div>
+      <a class="pc" href="index.html" aria-label="Abrir propuesta A"><div class="barra"><i></i><i></i><i></i></div><div class="marco"><img src="assets/vista-a-pc.webp" alt="" width="1440" height="900" loading="lazy" decoding="async"><iframe data-src="index.html" title="Propuesta A en computadora" tabindex="-1"></iframe></div></a>
+      <div><a class="cel" href="index.html" aria-label="Abrir propuesta A"><div class="marco"><img src="assets/vista-a-cel.webp" alt="" width="390" height="780" loading="lazy" decoding="async"><iframe data-src="index.html" title="Propuesta A en celular" tabindex="-1"></iframe></div></a><span class="etiqueta">En celular</span></div>
     </div>
   </div>
 </section>
@@ -93,8 +95,8 @@ footer .script{font-family:"Lobster";color:var(--amarillo);font-size:1.8rem;disp
       <a class="abrir" href="barda-blanca.html">Abrir propuesta ☛</a>
     </div>
     <div class="vistas">
-      <a class="pc" href="barda-blanca.html" aria-label="Abrir propuesta B"><div class="barra"><i></i><i></i><i></i></div><div class="marco"><iframe data-src="barda-blanca.html" title="Propuesta B en computadora" tabindex="-1" loading="lazy"></iframe></div></a>
-      <div><a class="cel" href="barda-blanca.html" aria-label="Abrir propuesta B"><div class="marco"><iframe data-src="barda-blanca.html" title="Propuesta B en celular" tabindex="-1" loading="lazy"></iframe></div></a><span class="etiqueta">En celular</span></div>
+      <a class="pc" href="barda-blanca.html" aria-label="Abrir propuesta B"><div class="barra"><i></i><i></i><i></i></div><div class="marco"><img src="assets/vista-b-pc.webp" alt="" width="1440" height="900" loading="lazy" decoding="async"><iframe data-src="barda-blanca.html" title="Propuesta B en computadora" tabindex="-1"></iframe></div></a>
+      <div><a class="cel" href="barda-blanca.html" aria-label="Abrir propuesta B"><div class="marco"><img src="assets/vista-b-cel.webp" alt="" width="390" height="780" loading="lazy" decoding="async"><iframe data-src="barda-blanca.html" title="Propuesta B en celular" tabindex="-1"></iframe></div></a><span class="etiqueta">En celular</span></div>
     </div>
   </div>
 </section>
@@ -107,8 +109,8 @@ footer .script{font-family:"Lobster";color:var(--amarillo);font-size:1.8rem;disp
       <a class="abrir" href="gran-baile.html">Abrir propuesta ☛</a>
     </div>
     <div class="vistas">
-      <a class="pc" href="gran-baile.html" aria-label="Abrir propuesta C"><div class="barra"><i></i><i></i><i></i></div><div class="marco"><iframe data-src="gran-baile.html" title="Propuesta C en computadora" tabindex="-1" loading="lazy"></iframe></div></a>
-      <div><a class="cel" href="gran-baile.html" aria-label="Abrir propuesta C"><div class="marco"><iframe data-src="gran-baile.html" title="Propuesta C en celular" tabindex="-1" loading="lazy"></iframe></div></a><span class="etiqueta">En celular</span></div>
+      <a class="pc" href="gran-baile.html" aria-label="Abrir propuesta C"><div class="barra"><i></i><i></i><i></i></div><div class="marco"><img src="assets/vista-c-pc.webp" alt="" width="1440" height="900" loading="lazy" decoding="async"><iframe data-src="gran-baile.html" title="Propuesta C en computadora" tabindex="-1"></iframe></div></a>
+      <div><a class="cel" href="gran-baile.html" aria-label="Abrir propuesta C"><div class="marco"><img src="assets/vista-c-cel.webp" alt="" width="390" height="780" loading="lazy" decoding="async"><iframe data-src="gran-baile.html" title="Propuesta C en celular" tabindex="-1"></iframe></div></a><span class="etiqueta">En celular</span></div>
     </div>
   </div>
 </section>
@@ -121,8 +123,14 @@ const marcos=[...document.querySelectorAll('.marco')];
 const ajusta=()=>marcos.forEach(m=>{const f=m.querySelector('iframe');f.style.transform=`scale(${m.clientWidth/f.offsetWidth})`;});
 new ResizeObserver(ajusta).observe(document.body);
 // se cargan al acercarse para no levantar las seis páginas de golpe
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const f=e.target.querySelector('iframe');f.src=f.dataset.src;io.unobserve(e.target);}}),{rootMargin:'300px'});
-marcos.forEach(m=>io.observe(m));
+// en celular (o con ahorro de datos) se queda la imagen fija: carga al instante.
+// en computadora la imagen se cambia por la página viva cuando el marco entra en pantalla.
+const enVivo=matchMedia('(min-width:900px)').matches&&!(navigator.connection&&navigator.connection.saveData);
+if(enVivo){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const f=e.target.querySelector('iframe');
+    f.addEventListener('load',()=>setTimeout(()=>f.classList.add('lista'),1200),{once:true});f.src=f.dataset.src;io.unobserve(e.target);}),{rootMargin:'100px'});
+  marcos.forEach(m=>io.observe(m));
+}
 ajusta();
 </script>
 </body>

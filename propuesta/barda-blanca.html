@@ -20,10 +20,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{position:relative;background:var(--cal);color:var(--k);font-family:"Work Sans",system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
-.muro-listo body{background:var(--muro) 0 0/var(--tw) var(--th)}
+body{--muro:url(assets/muro-b-color@1x.webp);--relieve:url(assets/muro-b-relieve@2x.webp);--tw:1230px;--th:820px;background:var(--cal) var(--muro) 0 0/var(--tw) var(--th)}
+@media (max-width:700px){body{--tw:959px;--th:640px}}
 /* el relieve del muro se multiplica sobre todo lo pintado */
 .relieve{position:absolute;inset:0;pointer-events:none;z-index:40;mix-blend-mode:multiply}
-.muro-listo .relieve{background:var(--relieve) 0 0/var(--tw) var(--th)}
+.relieve{background:var(--relieve) 0 0/var(--tw) var(--th)}
 a{color:inherit}
 img{max-width:100%;display:block}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -206,9 +207,9 @@ section{position:relative;padding:clamp(56px,8vw,110px) 0}
 .cinta.b{background:var(--amarillo);border-block:4px solid var(--k);rotate:-1.6deg;margin:10px -30px 0;padding:.35em 0 .25em;font-family:"Bowlby One";font-size:clamp(1.1rem,2.2vw,1.6rem);text-transform:uppercase;filter:url(#orilla)}
 .cinta.b b{color:var(--magenta);font-weight:400;padding:0 .5em}
 .vida .heroe .logo.visto{animation:v-sube .9s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-flota 5s ease-in-out 1.4s infinite}
-.vida .heroe .banda.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece 2.6s ease-in-out 2s infinite alternate}
-.vida .caja .no{animation:v-late 3s ease-in-out 2.4s infinite}
-.vida .caja:nth-child(3) .no{animation-delay:3.9s}
+.vida .heroe .banda.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece 2.6s ease-in-out 1.4s infinite alternate}
+.vida .caja .no{animation:v-late 3s ease-in-out 1.6s infinite}
+.vida .caja:nth-child(3) .no{animation-delay:3.1s}
 .vida .estreno .banda.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece 2.2s ease-in-out 1s infinite alternate}
 .baile{transition:translate .2s}.baile:hover{translate:8px 0}
 .vida .producto:hover svg{animation:v-zarandea .6s ease-in-out}
@@ -374,7 +375,7 @@ section{position:relative;padding:clamp(56px,8vw,110px) 0}
 <script src="assets/vida.js"></script>
 <script>
 Barda.rotulos();
-Barda.aplica({seed:11,pintura:[243,241,235],varia:5,manchas:1.1,junta:.87,sombra:.22,bisel:.045,grano:.22,ruido:14,chips:.035,chipColor:[168,156,140],bw:118,bh:36,j:5});
+// la barda ya viene pre-generada en assets/muro-b-*.webp (se hizo con Barda() una sola vez)
 
 const fechas=[
  {d:'14',m:'Mar',c:'Los Ángeles, Cal.',v:'Arena principal',p:'us'},
@@ -408,14 +409,14 @@ document.getElementById('forma').addEventListener('submit',e=>{e.preventDefault(
   e.target.classList.add('ok');});
 
 Vida([
- {s:'.tope nav a',t:'sube',base:0,paso:.06},
- {s:'.heroe .logo',t:'sube',base:.05},
- {s:'.heroe .serif',t:'sube',base:.35},
- {s:'.heroe .grande',t:'pinta',base:.55},
- {s:'.heroe .banda',t:'sello',base:1.5},
- {s:'.heroe .caja',t:'sello',base:1.75,paso:.3},
- {s:'.heroe .casual',t:'pinta',base:2.2},
- {s:'.heroe .ctas .boton',t:'sube',base:2.4,paso:.12},
+ {s:'.tope nav a',t:'sube',base:0,paso:.04},
+ {s:'.heroe .logo',t:'sube',base:0},
+ {s:'.heroe .serif',t:'sube',base:.1},
+ {s:'.heroe .grande',t:'pinta',base:.15},
+ {s:'.heroe .banda',t:'sello',base:.7},
+ {s:'.heroe .caja',t:'sello',base:.8,paso:.15},
+ {s:'.heroe .casual',t:'pinta',base:.9},
+ {s:'.heroe .ctas .boton',t:'sube',base:1,paso:.1},
  {s:'.cinta',t:'lado',base:.2},
  {s:'.titular .serif',t:'sube'},
  {s:'.titular .rotulo',t:'pinta',base:.2},

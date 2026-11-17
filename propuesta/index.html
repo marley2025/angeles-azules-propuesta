@@ -326,8 +326,8 @@ footer{padding:70px 0 130px;color:var(--tinta)}
 <link rel="stylesheet" href="assets/vida.css">
 <style>
 /* ---- vida A ---- */
-.vida .globo.izq.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece-a 3s ease-in-out 3.4s infinite alternate}
-.vida .globo.der.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece-a 3.4s ease-in-out 3.8s infinite alternate}
+.vida .globo.izq.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece-a 3s ease-in-out 2s infinite alternate}
+.vida .globo.der.visto{animation:v-sello .75s cubic-bezier(.2,.8,.2,1) var(--d) backwards,v-mece-a 3.4s ease-in-out 2.2s infinite alternate}
 @keyframes v-mece-a{from{rotate:-3deg}to{rotate:3deg}}
 .vida .destello{display:inline-block;animation:v-brilla 2.2s ease-in-out infinite}
 .vida .gira .destello:last-child{animation-delay:1.1s}
@@ -724,14 +724,14 @@ const tabs=[...document.querySelectorAll('.tabbar a')];
 const so=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)tabs.forEach(t=>t.classList.toggle('activo',t.getAttribute('href')==='#'+en.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 ['inicio','tour','musica','video','merch'].forEach(id=>so.observe(document.getElementById(id)));
 Vida([
- {s:'.anuncio .arco',t:'sello',base:.2},
- {s:'.amenizado',t:'pinta',base:1.2},
- {s:'.logo-pintado',t:'sello',base:1.6},
- {s:'.anuncio .gira',t:'pinta',base:2.1},
- {s:'.fechas-linea',t:'sube',base:2.6},
- {s:'.ciudades span',t:'sube',base:2.8,paso:.08},
- {s:'.cta-hero .boton',t:'sello',base:3.2,paso:.15},
- {s:'.globo',t:'sello',base:2.4,paso:.3},
+ {s:'.anuncio .arco',t:'sello',base:.05},
+ {s:'.amenizado',t:'pinta',base:.45},
+ {s:'.logo-pintado',t:'sello',base:.6},
+ {s:'.anuncio .gira',t:'pinta',base:.8},
+ {s:'.fechas-linea',t:'sube',base:1},
+ {s:'.ciudades span',t:'sube',base:1.05,paso:.05},
+ {s:'.cta-hero .boton',t:'sello',base:1.2,paso:.1},
+ {s:'.globo',t:'sello',base:1.1,paso:.2},
  {s:'.baile',t:'sube',paso:.08}
 ]);
 </script>

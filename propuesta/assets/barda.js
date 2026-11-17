@@ -24,7 +24,7 @@
   }
 
   function Barda(o) {
-    const S = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    const S = (o && o.escala) || Math.min(2, Math.max(1, window.devicePixelRatio || 1));
     const { cols = 10, rows = 20, bw = 114, bh = 34, j = 6, seed = 7, radio = 3,
       pintura = [244, 242, 236], varia = 7, manchas = 1, tinteMancha = [120, 108, 88],
       junta = .8, sombra = .38, bisel = .08, ruido = 16, grano = .3, poros = 0,
@@ -100,6 +100,7 @@
     for (let i = 0; i < d.length; i += 4) { const v = (Math.random() - .5) * ruido; d[i] += v; d[i + 1] += v; d[i + 2] += v; }
     sx.putImageData(id, 0, 0);
 
+    if (o && o.exportar) return { color: cc.toDataURL('image/webp', o.calidad || .8), relieve: sc.toDataURL('image/webp', o.calidad || .8), W, H };
     const blob = c => new Promise(res => c.toBlob(b => res(URL.createObjectURL(b)), 'image/jpeg', .9));
     return Promise.all([blob(cc), blob(sc)]).then(([color, relieve]) => ({ color, relieve, W, H }));
   }
