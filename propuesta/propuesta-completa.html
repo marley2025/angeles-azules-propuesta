@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta Rótulo de Barrio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chela+One&family=Lobster&family=Ranchers&family=Rye&family=Six+Caps&family=Ultra&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cal:#F4EAD5;--cal-2:#EADBBB;--azul:#1E3C9E;--azul-osc:#12256A;--turquesa:#2BB3A3;--amarillo:#F6B90F;--rosa:#E5197E;--rojo:#ED2929;--verde:#2E8B3E;--tinta:#1A1410;--gis:#F7F3E8;--g:clamp(16px,4vw,48px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cal);color:var(--tinta);font-family:"Work Sans",system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+.c{max-width:1180px;margin:0 auto;padding:0 var(--g)}
+section{padding:clamp(56px,8vw,104px) 0;border-bottom:4px solid var(--tinta)}
+.bloque{font-family:"Ranchers";text-transform:uppercase;line-height:.95;word-spacing:.16em;filter:url(#pincel)}
+.script{font-family:"Lobster";line-height:1}
+.letrero{font-family:"Rye";text-transform:uppercase}
+.sr{color:var(--amarillo);-webkit-text-stroke:2px var(--tinta);paint-order:stroke fill;text-shadow:3px 3px 0 var(--rojo),6px 6px 0 var(--tinta)}
+.sa{color:var(--gis);-webkit-text-stroke:2px var(--tinta);paint-order:stroke fill;text-shadow:3px 3px 0 var(--azul),6px 6px 0 var(--tinta)}
+.num{font-family:"Ranchers";display:inline-block;background:var(--tinta);color:var(--amarillo);padding:.3em .7em;transform:rotate(-2deg);font-size:.85rem;margin-bottom:14px}
+h2{font-size:clamp(2.2rem,5.5vw,4rem);margin-bottom:.45em}
+.lead{font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:62ch}
+.portada{background:var(--azul);color:var(--gis);text-align:center;padding:clamp(64px,10vw,140px) 0;position:relative;overflow:hidden}
+.portada::before{content:"";position:absolute;left:50%;top:50%;width:200vmax;height:200vmax;translate:-50% -50%;background:repeating-conic-gradient(var(--azul-osc) 0 7.5deg,var(--azul) 7.5deg 15deg);opacity:.6;z-index:0}
+.portada > *{position:relative}
+.portada img{width:min(420px,80%);margin:0 auto 24px}
+.portada .script{font-size:clamp(2rem,5vw,3.6rem);color:var(--rosa);-webkit-text-stroke:2px var(--tinta);paint-order:stroke fill;text-shadow:4px 4px 0 var(--tinta);transform:rotate(-3deg)}
+.portada h1{font-size:clamp(3rem,10vw,7.5rem)}
+.portada p{max-width:56ch;margin:22px auto 0;font-size:1.1rem}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.chips a{font-family:"Ranchers";font-size:.85rem;text-decoration:none;color:var(--tinta);background:var(--amarillo);border:3px solid var(--tinta);padding:.6em 1em;box-shadow:4px 4px 0 var(--tinta)}
+.chips a.r{background:var(--rosa);color:#fff}
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--gis);border:3px solid var(--tinta);box-shadow:6px 6px 0 var(--tinta);padding:22px}
+.card h3{font-family:"Ranchers";text-transform:uppercase;font-size:1.2rem;line-height:1.15;margin-bottom:.4em}
+.card p,.card li{font-size:.97rem}
+.card ul{padding-left:1.1em}
+.mal{border-left:10px solid var(--rojo)}
+.bien{border-left:10px solid var(--verde)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+.sw{border:3px solid var(--tinta);box-shadow:5px 5px 0 var(--tinta);background:var(--gis)}
+.sw i{display:block;height:96px;border-bottom:3px solid var(--tinta)}
+.sw div{padding:10px 12px;font-size:.85rem}
+.sw b{font-family:"Ranchers";font-size:.8rem;display:block}
+.tipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:32px}
+.tipo{background:var(--gis);border:3px solid var(--tinta);padding:22px;box-shadow:5px 5px 0 var(--tinta)}
+.tipo .m{font-size:2.6rem;margin-bottom:8px}
+.tipo small{font-family:"Ranchers";font-size:.72rem;color:var(--rosa)}
+.elementos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.el{background:var(--gis);border:3px solid var(--tinta);text-align:center;padding:18px 14px}
+.el .demo{height:90px;display:grid;place-items:center;margin-bottom:10px}
+.el b{font-family:"Ranchers";text-transform:uppercase;display:block}
+.el p{font-size:.88rem}
+.estrella{width:84px;aspect-ratio:1;background:var(--amarillo);display:grid;place-items:center;font-family:"Ranchers";font-size:.65rem;line-height:1;
+ clip-path:polygon(50% 0,61% 13%,77% 5%,79% 22%,96% 24%,88% 39%,100% 50%,88% 61%,96% 76%,79% 78%,77% 95%,61% 87%,50% 100%,39% 87%,23% 95%,21% 78%,4% 76%,12% 61%,0 50%,12% 39%,4% 24%,21% 22%,23% 5%,39% 13%)}
+.bands{display:flex;width:100%}.bands span{flex:1;height:40px;clip-path:polygon(0 0,100% 0,50% 100%)}
+.gp{width:100%;height:60px;background:var(--cal);position:relative}.gp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24px;background:var(--rojo);border-top:5px solid var(--amarillo)}
+table{width:100%;border-collapse:collapse;background:var(--gis);border:3px solid var(--tinta);box-shadow:8px 8px 0 var(--tinta)}
+th,td{text-align:left;padding:14px 16px;border-bottom:2px dashed rgba(0,0,0,.25);vertical-align:top;font-size:.97rem}
+th{font-family:"Ranchers";font-size:.8rem;background:var(--rojo);color:var(--gis);border-bottom:3px solid var(--tinta)}
+td:first-child{font-family:"Ranchers";text-transform:uppercase;white-space:nowrap}
+.tabla-wrap{overflow-x:auto;padding:0 10px 12px 0}
+.dispositivos{display:flex;gap:40px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.cel{width:300px;flex:none;border:10px solid var(--tinta);border-radius:40px;overflow:hidden;box-shadow:10px 10px 0 var(--rosa);background:var(--tinta)}
+.cel iframe{width:390px;height:844px;border:0;transform:scale(.718);transform-origin:0 0;display:block;margin-bottom:-238px}
+.pc{flex:1 1 520px;max-width:700px;border:6px solid var(--tinta);border-radius:12px;overflow:hidden;box-shadow:10px 10px 0 var(--turquesa);background:var(--tinta)}
+.pc .barra{height:28px;background:var(--tinta);display:flex;gap:6px;align-items:center;padding-left:10px}
+.pc .barra i{width:10px;height:10px;border-radius:50%;background:var(--rojo)}.pc .barra i:nth-child(2){background:var(--amarillo)}.pc .barra i:nth-child(3){background:var(--verde)}
+.pc .vista{position:relative;width:100%;aspect-ratio:1440/900;overflow:hidden;background:var(--cal)}
+.pc iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0}
+.fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:f}
+.fase{background:var(--gis);border:3px solid var(--tinta);padding:20px;position:relative;box-shadow:5px 5px 0 var(--tinta)}
+.fase .sem{font-family:"Ranchers";font-size:.75rem;background:var(--amarillo);border:2px solid var(--tinta);padding:.15em .5em;display:inline-block;margin-bottom:10px}
+.fase h3{font-family:"Ranchers";text-transform:uppercase;font-size:1.1rem;margin-bottom:6px}
+.fase li{font-size:.92rem;margin-left:1.1em}
+.idea{background:var(--rosa);color:var(--gis)}
+.idea h2{color:var(--gis)}
+.idea .card{color:var(--tinta)}
+.opciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px}
+.opcion{display:block;text-decoration:none;color:var(--tinta);background:var(--gis);border:3px solid var(--tinta);box-shadow:8px 8px 0 var(--tinta);transition:transform .15s}
+.opcion:hover{transform:translate(-3px,-3px)}
+.opcion img{width:100%;aspect-ratio:4/3;object-fit:cover;border-bottom:3px solid var(--tinta)}
+.opcion div{padding:16px 18px 20px}
+.opcion .letra{font-family:"Ranchers";font-size:.8rem;background:var(--amarillo);border:2px solid var(--tinta);padding:.15em .5em;display:inline-block;margin-bottom:8px}
+.opcion h3{font-family:"Ranchers";text-transform:uppercase;font-size:1.3rem;word-spacing:.16em;margin-bottom:6px}
+.opcion p{font-size:.95rem}
+footer{background:var(--tinta);color:var(--gis);text-align:center;padding:40px 16px;font-size:.85rem;opacity:.95}
+footer .script{color:var(--amarillo);font-size:2rem;display:block;margin-bottom:8px}
+@media (max-width:600px){.cel{width:270px}.cel iframe{transform:scale(.641);margin-bottom:-303px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="pincel"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="2"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></svg>
+
+<header class="portada">
+  <img src="assets/logo-laa.webp" alt="Los Ángeles Azules">
+  <div class="script">Propuesta de rediseño</div>
+  <h1 class="bloque sr">Rótulo de barrio</h1>
+  <p>Un sitio que se recorre como una calle de pueblo: bardas encaladas con anuncios de baile pintados a mano, la tienda de discos con su cortina, la fonda, el abarrotes y el aviso a la comunidad. La cumbia de Los Ángeles Azules nació en el barrio, y el sitio también.</p>
+  <div class="chips"><a class="r" href="#direcciones">Ver las 3 direcciones →</a><a href="#manejo">Plan de manejo</a></div>
+</header>
+<section id="direcciones">
+  <div class="c">
+    <span class="num">Tres direcciones</span>
+    <h2 class="bloque sa">Escoja su barda</h2>
+    <p class="lead" style="margin-bottom:32px">Las tres usan el mismo contenido, el logo oficial y el mismo sistema de manejo. Cambia el tipo de barda y el tipo de rotulista. Las tres son prototipos navegables y se adaptan a celular.</p>
+    <div class="opciones">
+      <a class="opcion" href="index.html"><img src="assets/opcion-a.jpg" alt="Vista de la dirección A"><div><span class="letra">A</span><h3>Calle del pueblo</h3><p>Bardas de colores gastadas por los años: cal, salitre, tabique expuesto, la tienda de discos, la fonda y el abarrotes. La más narrativa y nostálgica.</p></div></a>
+      <a class="opcion" href="barda-blanca.html"><img src="assets/opcion-b.jpg" alt="Vista de la dirección B"><div><span class="letra">B</span><h3>Barda blanca</h3><p>Ladrillo encalado y lettering popular de hoy: letras con degradado, contorno turquesa y sombra negra, cinta en script y recuadros “SÍ hay baile”. La más limpia, alegre y compartible en redes.</p></div></a>
+      <a class="opcion" href="gran-baile.html"><img src="assets/opcion-c.jpg" alt="Vista de la dirección C"><div><span class="letra">C</span><h3>Gran baile de noche</h3><p>Block pintado de azul bajo la luz del poste y letra cromada sonidera. El inicio es el anuncio del próximo baile y se actualiza solo con la gira. La más de fiesta y de concierto.</p></div></a>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="c">
+    <span class="num">01 · Diagnóstico</span>
+    <h2 class="bloque sa">Lo que hoy no funciona</h2>
+    <div class="grid g2">
+      <div class="card mal"><h3>Se ve como cualquier banda</h3><p>Plantilla genérica de WordPress + Elementor. El logo ya tiene muchísima personalidad (letra 3D, sol, colibríes, sagrado corazón), pero el sitio no la continúa.</p></div>
+      <div class="card mal"><h3>Tour sin fechas</h3><p>La gira “Cumbia Sin Fronteras” aparece como banner con enlace a preventa, pero no hay ciudades, recintos ni fechas consultables.</p></div>
+      <div class="card mal"><h3>Botones confusos</h3><p>La etiqueta “Buy” se repite en casi todos los bloques sin dejar claro qué se compra. En inglés, en un sitio en español.</p></div>
+      <div class="card mal"><h3>Merch fuera de casa</h3><p>Merch es sólo un enlace externo; no hay producto visible ni antojo antes de salir del sitio.</p></div>
+      <div class="card mal"><h3>Pesado</h3><p>Una decena de hojas de estilo minificadas y plugins de constructor: impacto directo en velocidad móvil, que es donde está casi todo el público.</p></div>
+      <div class="card mal"><h3>Sin dato del fan</h3><p>El newsletter no pide ciudad: no se puede avisar “hay baile cerca de ti”, que es el mensaje que más vende boletos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cal-2)">
+  <div class="c">
+    <span class="num">02 · Concepto</span>
+    <h2 class="bloque sa">La barda del pueblo</h2>
+    <p class="lead" style="margin-bottom:32px">Cada sección del sitio es una pared real de pueblo o de barrio, con lo que tienen esas paredes: cal manchada de humedad, ladrillo donde se cayó el aplanado, pintura descarapelada, rótulos viejos que se asoman debajo de la cal y letras hechas a pincel por un rotulista.</p>
+    <div class="elementos">
+      <div class="el"><div class="demo"><span class="bloque sr" style="font-size:2.6rem">¡Gran baile!</span></div><b>Anuncio de baile</b><p>“Gran baile · amenizado por la internacional…”: la estructura clásica de la barda de baile es el inicio del sitio.</p></div>
+      <div class="el"><div class="demo"><span style="font-family:Rye;font-size:2rem;color:var(--rojo);opacity:.25">SE PROHÍBE</span></div><b>Rótulos fantasma</b><p>Anuncios viejos (“Vulcanizadora”, “Comida corrida”, “Se rentan sillas”) que se transparentan bajo la cal.</p></div>
+      <div class="el"><div class="demo"><img src="assets/muro-detalle.png" alt="" style="height:90px;width:auto;border-radius:4px"></div><b>Muro vivo</b><p>Relieve de aplanado, salitre que sube del piso, escurrimientos, grietas y tabique rojo expuesto bajo el aplanado gris. Todo generado con SVG, sin fotos pesadas.</p></div>
+      <div class="el"><div class="demo"><span style="font-family:Ultra;font-size:2.6rem;color:var(--rojo)">HAY:</span></div><b>Letreros de tiendita</b><p>“HAY:”, “AVISO”, “Hoy no se fía, mañana sí”, “No tire basura”: el tono del barrio para navegar.</p></div>
+      <div class="el"><div class="demo"><div class="gp"></div></div><b>Guardapolvo descarapelado</b><p>La media barda pintada cierra cada sección; cada pared tiene su color.</p></div>
+      <div class="el"><div class="demo"><span style="font-family:Ranchers;font-size:1.3rem;background:var(--rojo);color:#fff;padding:.5em 1em;border-radius:48% 52% 46% 54%/58% 44% 56% 42%;box-shadow:inset 0 0 0 3px #17120E,3px 4px 0 #17120E">¡Boletos aquí!</span></div><b>Botones pintados</b><p>Óvalos a pincel con su manita ☛. El desgaste nunca toca botones ni textos que hay que leer.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="c">
+    <span class="num">03 · Sistema visual</span>
+    <h2 class="bloque sa">Pintura de la tlapalería</h2>
+    <p class="lead" style="margin-bottom:28px">La paleta sale del propio logo (turquesa de las letras, amarillo del sol, rojo del corazón) y se completa con los colores de barda: añil, rosa mexicano, verde bandera y cal.</p>
+    <div class="swatches">
+      <div class="sw"><i style="background:var(--azul)"></i><div><b>Azul añil</b>#1D3A9A</div></div>
+      <div class="sw"><i style="background:var(--turquesa)"></i><div><b>Turquesa logo</b>#22A898</div></div>
+      <div class="sw"><i style="background:var(--amarillo)"></i><div><b>Amarillo sol</b>#F4B714</div></div>
+      <div class="sw"><i style="background:var(--rosa)"></i><div><b>Rosa mexicano</b>#DF1A7C</div></div>
+      <div class="sw"><i style="background:var(--rojo)"></i><div><b>Rojo corazón</b>#D9261C</div></div>
+      <div class="sw"><i style="background:var(--verde)"></i><div><b>Verde bandera</b>#25803A</div></div>
+      <div class="sw"><i style="background:#EFE6D1"></i><div><b>Cal</b>#EFE6D1</div></div>
+    </div>
+    <div class="tipos">
+      <div class="tipo"><div class="m" style="font-family:Ranchers">AA PINCEL</div><small>Ranchers · títulos de barda</small><p>Letra de molde condensada, hecha a pincel.</p></div>
+      <div class="tipo"><div class="m" style="font-family:Rye">AA REMATE</div><small>Rye · letreros de comercio</small><p>La letra “de circo” de las fachadas y los carteles de baile.</p></div>
+      <div class="tipo"><div class="m" style="font-family:Ultra">AA GORDA</div><small>Ultra · HAY / AVISO</small><p>Para los gritos: anuncios cortos y muy visibles.</p></div>
+      <div class="tipo"><div class="m" style="font-family:'Six Caps';font-size:3.4rem">AA ANGOSTA</div><small>Six Caps · fechas y giras</small><p>La letra alta y apretada de los carteles de baile.</p></div>
+      <div class="tipo"><div class="m" style="font-family:Lobster;color:var(--rosa)">Aa Script</div><small>Lobster · “amenizado por…”</small><p>La cursiva de pincel que dialoga con el logo.</p></div>
+      <div class="tipo"><div class="m" style="font-family:'Chela One'">Aa Rótulo</div><small>Chela One · textos pintados</small><p>Para frases largas pintadas a mano.</p></div>
+    </div>
+    <p style="margin-top:20px;font-size:.92rem;opacity:.75">Mezclar varias letras en una misma barda es parte del lenguaje del rotulista. Para producción, lo ideal es que un rotulista real pinte los títulos y se digitalicen (ver “Idea de campaña”).</p>
+  </div>
+</section>
+
+<section style="background:var(--cal-2)">
+  <div class="c">
+    <span class="num">04 · Arquitectura</span>
+    <h2 class="bloque sa">Cada sección, una pared del barrio</h2>
+    <div class="tabla-wrap"><table>
+      <thead><tr><th>Sección</th><th>Pared</th><th>Qué resuelve</th></tr></thead>
+      <tbody>
+        <tr><td>Inicio</td><td>Barda de “¡Gran baile!” con cable de luz y carteles</td><td>Una sola llamada principal (gira o estreno), editable sin diseñador.</td></tr>
+        <tr><td>Tour</td><td>Barda amarilla “Próximos bailes” + carteles pegados</td><td>Fechas reales, filtro por país, “¡Agotado!”, botón directo a boletos.</td></tr>
+        <tr><td>Música</td><td>Tienda de discos “La Azul”: cortina pintada y letrero de “HAY:”</td><td>El estreno en la cortina; el catálogo en la lista del “HAY:”.</td></tr>
+        <tr><td>Video</td><td>Fonda: tele vieja y menú de “video corrido”</td><td>Reproductor más lista de videos (primer tiempo, segundo, guisado, postre).</td></tr>
+        <tr><td>Historia</td><td>Mural del barrio + placa conmemorativa</td><td>Biografía con un tono de orgullo local.</td></tr>
+        <tr><td>Merch</td><td>Abarrotes “Los Azules” con toldo</td><td>Producto visible antes de ir a la tienda.</td></tr>
+        <tr><td>Newsletter</td><td>“AVISO a la comunidad”</td><td>Correo + ciudad para avisar de preventas cercanas.</td></tr>
+        <tr><td>Pie</td><td>Muro de cemento: “No tire basura, ¡sí baile cumbia!”</td><td>Redes, enlaces y contacto.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="c">
+    <span class="num">05 · Móvil primero</span>
+    <h2 class="bloque sa">Se maneja como app</h2>
+    <p class="lead" style="margin-bottom:36px">En celular cada barda se apila y la navegación baja a una barra al alcance del pulgar, con Merch en un sello redondo al centro. Las dos vistas son el prototipo real y se pueden usar.</p>
+    <div class="dispositivos">
+      <div class="cel"><iframe src="index.html" title="Prototipo móvil" loading="lazy"></iframe></div>
+      <div class="pc"><div class="barra"><i></i><i></i><i></i></div><div class="vista" id="vista"><iframe src="index.html" title="Prototipo escritorio" loading="lazy" tabindex="-1"></iframe></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="manejo" style="background:var(--cal-2)">
+  <div class="c">
+    <span class="num">06 · Manejo</span>
+    <h2 class="bloque sa">Cómo se opera el sitio</h2>
+    <p class="lead" style="margin-bottom:28px">El diseño sólo vale si el equipo lo puede actualizar solo, rápido y sin romperlo.</p>
+    <div class="grid g3">
+      <div class="card bien"><h3>CMS sencillo, sin constructor</h3><p>Sitio estático rápido (Astro o Next) con un CMS por bloques (Sanity, Strapi o WordPress “headless”). El equipo llena campos; el diseño de rótulo se aplica solo.</p></div>
+      <div class="card bien"><h3>Fechas automáticas</h3><p>El tablero de bailes se alimenta de Bandsintown o de la ticketera. Una fecha nueva aparece en el sitio sin tocar nada.</p></div>
+      <div class="card bien"><h3>Lanzamientos conectados</h3><p>Al publicar un sencillo se carga una vez y genera página, tarjeta de la tiendita y enlaces a todas las plataformas (estilo smart link).</p></div>
+      <div class="card bien"><h3>Merch integrado</h3><p>Catálogo de la tienda oficial leído vía API (p. ej. Shopify Storefront): productos y precios dentro del sitio, pago en la tienda.</p></div>
+      <div class="card bien"><h3>Fans por ciudad</h3><p>Newsletter con ciudad/C.P. para mandar “hay baile cerca de ti” cuando abre una preventa. Integración con la herramienta de correo del equipo.</p></div>
+      <div class="card bien"><h3>Bilingüe de verdad</h3><p>ES/EN con contenido separado (no traducción automática), clave para la gira en EE.UU.</p></div>
+      <div class="card bien"><h3>Medición</h3><p>Analítica por campaña: clics a boletos, a plataformas y a merch por sección, para saber qué cartel vende.</p></div>
+      <div class="card bien"><h3>Rendimiento y accesibilidad</h3><p>Meta: carga &lt; 2.5 s en 4G, contraste AA, navegación con teclado y respeto a “reducir movimiento”. Las texturas son CSS/SVG, no imágenes pesadas.</p></div>
+      <div class="card bien"><h3>Guía de rótulo</h3><p>Manual corto con plantillas de cartel, estrella y tablero, para que redes sociales y el sitio hablen igual.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="idea">
+  <div class="c">
+    <span class="num">07 · Idea de campaña</span>
+    <h2 class="bloque sr">Rotulistas de verdad</h2>
+    <div class="grid g2">
+      <div class="card"><h3>El sitio pintado a mano</h3><p>Invitar a rotulistas de Iztapalapa y de las ciudades de la gira a pintar los títulos del sitio en bardas reales. Se fotografían, se digitalizan y se convierten en los encabezados finales: cada sección firmada por un rotulista.</p></div>
+      <div class="card"><h3>Contenido para redes</h3><p>Videos del proceso (time-lapse de la barda pintándose) para lanzar el sitio, y una barda nueva por cada ciudad del tour: “Hoy, gran baile en Houston”.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="c">
+    <span class="num">08 · Ruta</span>
+    <h2 class="bloque sa">Plan de trabajo</h2>
+    <div class="fases">
+      <div class="fase"><span class="sem">Sem 1–2</span><h3>Descubrimiento</h3><ul><li>Entrevistas con management</li><li>Inventario de contenido</li><li>Métricas actuales</li></ul></div>
+      <div class="fase"><span class="sem">Sem 3–5</span><h3>Diseño</h3><ul><li>Sistema de rótulo final</li><li>Diseño UI escritorio y móvil</li><li>Sesión con rotulistas</li></ul></div>
+      <div class="fase"><span class="sem">Sem 6–9</span><h3>Desarrollo</h3><ul><li>Front + CMS</li><li>Integraciones: tour, música, merch, correo</li><li>Bilingüe</li></ul></div>
+      <div class="fase"><span class="sem">Sem 10</span><h3>Lanzamiento</h3><ul><li>Pruebas y QA</li><li>Capacitación del equipo</li><li>Campaña de lanzamiento</li></ul></div>
+    </div>
+    <p style="margin-top:18px;font-size:.88rem;opacity:.7">Tiempos estimados, a validar en descubrimiento.</p>
+  </div>
+</section>
+
+<footer><span class="script">¡Se agradece!</span>Propuesta conceptual · maqueta no oficial. Fechas y textos de ejemplo.</footer>
+
+<script>
+const v=document.getElementById('vista'),f=v.querySelector('iframe');
+const ajusta=()=>{f.style.transform=`scale(${v.clientWidth/1440})`};
+new ResizeObserver(ajusta).observe(v);ajusta();
+</script>
+</body>
+</html>
